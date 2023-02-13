@@ -1,7 +1,6 @@
 +++
 title = "Home"
-template = "page.html"
-date = 2023-02-13
+template = "home.html"
 +++
 
 What?
