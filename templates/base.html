@@ -7,5 +7,21 @@
   <link rel="stylesheet" href="style.css">
   {% block extra_head %} {% endblock extra_head %}
 </head>
-<body style="overflow-x: hidden">{% block layout %} {% endblock %}</body>
+<body style="overflow-x: hidden">
+<div>
+  <p>We interrupt your browsing to bring you</p>
+  <h1>Crash Lime</h1>
+  <p>Delicious performance 64 bites at a time!</p>
+  <hr>
+</div>
+<div>{% block content %} {% endblock %}</div>
+<div>
+  <hr>
+  <p>
+    You are reading... Crash Lime!<br>
+    Thank you for tuning in.
+  </p>
+  <p>Copyright © 20XX Insert Employer Here, All Limes Preserved.</p>
+</div>
+</body>
 </html>
