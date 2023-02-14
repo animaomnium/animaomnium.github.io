@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Texturina:ital,opsz,wght@0,12..72,400;0,12..72,700;1,12..72,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
 
-* {
+body {
   font-family: Texturina;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Titan One";
 }
