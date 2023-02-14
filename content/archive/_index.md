@@ -1,5 +1,6 @@
 +++
 title = "Archive"
+template = "home.html"
 +++
 
 # Archive
