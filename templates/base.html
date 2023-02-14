@@ -4,18 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
   <title>{% if page.title %}{{ page.title }} (Crash Lime){% else %}Crash Lime{% if section.title %} {{ section.title }}{% endif %}{% endif %}</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css" />
+  <link rel="stylesheet" href="style.css" />
   {% block extra_head %} {% endblock extra_head %}
 </head>
 <body style="overflow-x: hidden">
-<div>
+<div class="header">
   <p>We interrupt this doomscroll to bring you...</p>
   <h1>Crash Lime</h1>
   <p>Delicious performance 64 bites at a time!</p>
   <hr>
 </div>
-<div>{% block content %} {% endblock %}</div>
-<div>
+<div class="content">{% block content %} {% endblock %}</div>
+<div class="footer">
   <hr>
   <p>Thank you for tuning in!</p>
   <p>Copyright © 20XX Insert Employer Here, All Limes Preserved.</p>
