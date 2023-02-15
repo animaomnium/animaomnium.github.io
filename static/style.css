@@ -23,7 +23,7 @@ h1, h2, h3, h4, h5, h6 {
 .header, .content, .footer {
   margin-left: auto;
   margin-right: auto;
-  padding: 1rem;
+  padding: 1.5rem;
   max-width: 35rem;
 }
 
