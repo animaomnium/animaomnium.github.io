@@ -23,8 +23,8 @@ h1, h2, h3, h4, h5, h6 {
 .header, .content, .footer {
   margin-left: auto;
   margin-right: auto;
-  padding: 2rem;
-  max-width: 50rem;
+  padding: 1rem;
+  max-width: 35rem;
 }
 
 .header, .footer {
@@ -34,4 +34,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .header {
   text-align: center;
+}
+
+a {
+  color: DarkSlateGray;
+}
+
+a:visited {
+  color: inherit;
 }
