@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Texturina:ital,opsz,wght@0,12..72,400;0,12..72,700;1,12..72,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
 
 html {
   font-size: 15pt;
@@ -56,4 +57,14 @@ a:visited {
 
 .nolink {
   all: unset;
+}
+
+code {
+  font-family: "IBM Plex Mono";
+  font-size: 14pt;
+}
+
+pre {
+  background-color: #222;
+  padding: 1em;
 }
