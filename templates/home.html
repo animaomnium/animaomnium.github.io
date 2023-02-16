@@ -2,5 +2,7 @@
 {% block content %}
 {{ section.content | safe }}
 <h1>Archive</h1>
-... There's nothing here... yet!
+{% for post in section.pages %}
+  <p><a href="{{ post.permalink }}">{{ post.title }}</a></p>
+{% endfor %}
 {% endblock %}
