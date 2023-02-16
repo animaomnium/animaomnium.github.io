@@ -41,12 +41,15 @@ a {
 }
 
 a:visited {
-  color: #222;
+  color: inherit;
 }
 
 .header a,
+.footer a {
+  color: #eee;
+}
+
 .header a:visited,
-.footer a,
 .footer a:visited {
   color: inherit;
 }
