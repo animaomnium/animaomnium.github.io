@@ -3,6 +3,9 @@
 {{ section.content | safe }}
 <h1>Archive</h1>
 {% for post in section.pages %}
-  <p><a href="{{ post.permalink }}">{{ post.title }}</a></p>
+  <p>
+    <a href="{{ post.permalink }}">{{ post.title }}</a>
+    <i>{{ page.date }} — {{ page.reading_time }} minute{{ page.reading_time | pluralize }} long</i>
+  </p>
 {% endfor %}
 {% endblock %}
