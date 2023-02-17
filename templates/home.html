@@ -5,7 +5,7 @@
 {% for post in section.pages %}
   <p>
     <a href="{{ post.permalink }}">{{ post.title }}</a><br>
-    <i>{{ post.date }} · x • {{ post.reading_time }} minute{{ post.reading_time | pluralize }} long</i>
+    <i>{{ post.date }} • {{ post.reading_time }} minute{{ post.reading_time | pluralize }} long</i>
   </p>
 {% endfor %}
 {% endblock %}
