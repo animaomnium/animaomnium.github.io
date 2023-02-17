@@ -59,7 +59,7 @@ It's too early to say what will happen with Austral in the long-run, but in the 
 
 There will be some growing pains. At some point, as Rust discovered, the [restrictions][46] imposed by lexical regions will have to be re-evaluated. The package ecosystem is nascent, so while I wouldn't quite build your next company in the language, it might be fun (and useful!) to port over a little low-level library. (Forget [Rust][47], Rewrite it in Austral!)
 
-To recap: [Austral][0] is a [systems programming language][17] that uses [linear types][1] to model [resources][12]. It's [small][4], and is working proof that borrow checkers need [not][600 lines] be complex. I hope that Austral continues to grow and build on its innovations; I hope that future languages continue the example Austral sets and build off of prior research in a way that makes it practically tractable. What's Austral for [dependent types][48]? [Automatic parallelization][49]? [Distributed computing][50]? Time will tell.
+To recap: [Austral][0] is a [systems programming language][17] that uses [linear types][1] to model [resources][12]. It's [small][4], and is working proof that borrow checkers need [not][51] be complex. I hope that Austral continues to grow and build on its innovations; I hope that future languages continue the example Austral sets and build off of prior research in a way that makes it practically tractable. What's Austral for [dependent types][48]? [Automatic parallelization][49]? [Distributed computing][50]? Time will tell.
 
 [0]: https://austral-lang.org
 [1]: https://wiki.c2.com/LinearTypes
