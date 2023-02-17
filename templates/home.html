@@ -4,7 +4,7 @@
 <h1>Archive</h1>
 {% for post in section.pages %}
   <p>
-    <a href="{{ post.permalink }}">{{ post.title }}</a>
+    <a href="{{ post.permalink }}">{{ post.title }}</a><br>
     <i>{{ post.date }} — {{ post.reading_time }} minute{{ post.reading_time | pluralize }} long</i>
   </p>
 {% endfor %}
