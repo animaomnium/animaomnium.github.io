@@ -11,6 +11,7 @@ body {
   color: #222;
   background-color: #eee;
   line-height: 1.3;
+  hyphens: auto;
   margin: 0;
   padding: 0;
 }
@@ -67,4 +68,6 @@ code {
 pre {
   background-color: #222;
   padding: 1em;
+  overflow-x: scroll;
+  whitespace: nowrap;
 }
