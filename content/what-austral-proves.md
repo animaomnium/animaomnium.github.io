@@ -15,7 +15,7 @@ Austral is a simple language. Like [Go][53], it is designed to be small enough t
 
 > A central constraint in the design of Austral is the language should be easy to implement. Not just because I was the only person writing the compiler, but because I want Austral to be a hundred year language, where you can reliably run code from decades ago (Common Lisp is like this: it is possible). If, for whatever reason, the source code of the bootstrapping compiler was lost, it would be trivial to rewrite it again from the ~100 pages of spec (roughly half of which describes the rationale for various design decisions).
 
-To help you cobble together a rough picture of Austral, I'll say it has a [Ada][8]-like syntax with [Rust][9]-like semantics. Like [Rust][10], it has [traits][11] for modeling interfaces. Austral also leverages the type system to model [resources][12], which it does through the use of [Linear Types][1]. (Rust uses [Affine Types][13], which are similar, but a little less restrictive.)
+To help you cobble together a rough picture of Austral, I'll say it has a [Ada][8]-like syntax with [Rust][9]-like semantics. Like [Rust][10], it has [traits][11] (typeclasses) for modeling interfaces. Austral also leverages the type system to model [resources][12], which it does through the use of [Linear Types][1]. (Rust uses [Affine Types][13], which are similar, but a little less restrictive.)
 
 Austral divides values into two type [Universes][14]: *free* values, which are small and can be copied freely, and *linear* values, which must be used *exactly* once. This constraint ensures that there is one—and only one—handle to a linear value at any given point in the program.
 
