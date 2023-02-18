@@ -17,9 +17,9 @@ Austral is a simple language. Like [Go][53], it is designed to be small enough t
 
 To help you cobble together a rough picture of Austral, I'll say it has a [Ada][8]-like syntax with [Rust][9]-like semantics. Like [Rust][10], it has [traits][11] for modeling interfaces. Austral also leverages the type system to model [resources][12], which it does through the use of [Linear Types][1]. (Rust uses [Affine Types][13], which are similar, but a little less restrictive.)
 
-Austral divides values into two type [Universes][14]: normal values, which are small and can be copied freely, and linear values, which must be consumed *exactly* once.
+Austral divides values into two type [Universes][14]: *free* values, which are small and can be copied freely, and *linear* values, which must be used *exactly* once. This constraint ensures that there is one—and only one—handle to a linear value at any given point in the program.
 
-Austral's power to model resources stems from its Linear type system. Most data—like bools, ints, and small structs—can be modeled using normal values. Resources—like [memory][15], [file descriptors][16], and database connections—are modeled as *linear values*. Linear values use the type system to statically ensure that there is only one handle to a resource at any given point in the program. Modeling resources is essential in [systems programming][17], and Austral, like Rust, will catch [memory-safety][18] bugs (and other similar classes of errors) at compile-time.
+Austral's power to model resources stems from its Linear type system. Most data—like bools, ints, and small structs—can be modeled using normal free values. Resources—like [memory][15], [file descriptors][16], and database connections—are modeled as *linear values*. Linear values use the type system to statically ensure that there is only one handle to a resource at any given point in the program. Modeling resources is essential in [systems programming][17], and Austral, like Rust, will catch [memory-safety][18] bugs (and other similar classes of errors) at compile-time.
 
 Austral includes a few innovations over Rust, such as a novel [*borrow*][19] syntax for annotating regional lifetimes:
 
