@@ -1,16 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 <p><i>
-  Authored on{{ page.date }}.<br>
-  By Anima Omnium.<br>
-  {{ page.reading_time }} minute{{ page.reading_time | pluralize }} required.
+  {{ page.date }} •
+  {{ page.reading_time }} minute{{ page.reading_time | pluralize }} required
 </i></p>
 <h1>{{ page.title }}</h1>
 {{ page.content | safe }}
-<p align=center>
+<p><i>
   <a href="https://lobste.rs/stories/new?url={{ page.permalink | urlencode }}">Lobsters</a> •
   <a href="https://news.ycombinator.com/submitlink?u={{ page.permalink | urlencode }}&t={{ page.title | urlencode }}">HN</a> •
   <a href="https://www.reddit.com/submit?url={{ page.permalink | urlencode }}">Reddit</a> •
   <a href="http://twitter.com/share?url={{ page.permalink | urlencode }}&text={{ page.title | urlencode }}">Twitter</a>
-</p>
+</i></p>
 {% endblock %}
