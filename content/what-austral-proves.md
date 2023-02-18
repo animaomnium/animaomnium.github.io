@@ -65,7 +65,7 @@ To recap: [Austral][0] is a [systems programming language][17] that uses [linear
 [1]: https://wiki.c2.com/LinearTypes
 [2]: https://github.com/austral/austral
 [3]: https://borretti.me
-[4]: https://github.com/austral/specification
+[4]: https://austral-lang.org/spec/spec.html
 [5]: https://borretti.me/article/simplicity-and-survival
 [6]: https://en.wikipedia.org/wiki/cobol
 [7]: https://en.wikipedia.org/wiki/scheme
