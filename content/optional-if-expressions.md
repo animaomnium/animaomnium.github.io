@@ -1,16 +1,17 @@
 +++
 title = "Optional If Expressions"
-date = 2023-02-17
+date = 2023-04-13
 draft = true
 +++
 
 A while back, [Robert Nystrom][1] published a post on [type-checking *if-expressions*][2]. If-expressions are generally a feature of [*expression-oriented* languages][3], in which all language constructs produce a value. An if-expression takes on the value produced by the selected branch:
 
 ```rust
+// Using Rust for this post
 let title = if favorite {
-  "Best Muffin Recipe".to_string()
+  "Best Muffin Recipe"
 } else {
-  "Decent Muffin Recipe".to_string()
+  "Decent Muffin Recipe"
 };
 ```
 
@@ -57,7 +58,7 @@ quotient = if denominator != 0.0 {
 
 This pattern could be useful for [look-before-you-leap][9] type contexts, where a potentially fallible expression needs to check some preconditions before running.
 
-Currently, this feature is [available as a method][10] on `bool`:
+Currently, this feature is [available as a method][10] on `bool` in Rust:
 
 ```rust
 // …
@@ -77,7 +78,7 @@ How to integrate imperative, statement-oriented if-statements in an expression-o
 
 Taking a step back, in all honesty, I'm not a huge fan of if-expressions and, well, [booleans][16] in general. In the long run, I think that [pattern-matching][17] on [structured data][18] is a much cleaner and less [error-prone][19] route. The issue of [deeply-nested pattern-matching][20] can be resolved with a little sugar (e.g. [`do`][21]/[`with`][22]/[`use`][23] notation in [Haskell][24]/[Koka][25]/[Gleam][26]): there's no reason not to `match`!
 
-But until then, let's at least make the if-expressions we have now a little nicer. 
+But until then, let's at least make the if-expressions we have now a little nicer! What do you think?
 
 [1]: https://twitter.com/munificentbob
 [2]: http://journal.stuffwithstuff.com/2023/01/03/type-checking-if-expressions/
