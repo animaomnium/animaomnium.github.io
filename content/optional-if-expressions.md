@@ -57,7 +57,7 @@ quotient = if denominator != 0.0 {
 
 This pattern could be useful for [look-before-you-leap][9] type contexts, where a potentially fallible expression needs to check some preconditions before running.
 
-Currently, this feature is [available as a method][10] on `bool` in [unstable Rust][11]:
+Currently, this feature is [available as a method][10] on `bool`:
 
 ```rust
 // …
@@ -73,37 +73,33 @@ Optional if-expressions are syntactically cleaner, neatly extend the semantics o
 
 As a plus, they're also a lot simpler to implement, as they don't require keeping track of expression vs non-expression contexts. (Of course, if the compiler keeps track of context to figure out when it can relax the 'same-type' rule, as Nystrom does, limiting the context of single-branch if-expressions isn't much additional work.)
 
-How to integrate imperative, statement-oriented if-statements in an expression-oriented language is an interesting question. Optional if-expressions are an unambiguous syntactic transformation, [sugar][13] for a common pattern often used. While they neatly resolve a couple problems, they're not perfect. For starters, I'm not a huge fan that the [Option][14] type is introduced implicitly. In a language with [nullable values][15], nullable if-expressions would be a total no-go.
+How to integrate imperative, statement-oriented if-statements in an expression-oriented language is an interesting question. Optional if-expressions are an unambiguous syntactic transformation, [sugar][13] for a common pattern often used. While they neatly resolve a couple problems, they're not perfect. For starters, I'm not a huge fan that the [Option][8] type is introduced implicitly. In a language with [nullable values][15], nullable if-expressions would be a total no-go.
 
 Taking a step back, in all honesty, I'm not a huge fan of if-expressions and, well, [booleans][16] in general. In the long run, I think that [pattern-matching][17] on [structured data][18] is a much cleaner and less [error-prone][19] route. The issue of [deeply-nested pattern-matching][20] can be resolved with a little sugar (e.g. [`do`][21]/[`with`][22]/[`use`][23] notation in [Haskell][24]/[Koka][25]/[Gleam][26]): there's no reason not to `match`!
 
 But until then, let's at least make the if-expressions we have now a little nicer. 
 
-https://doc.rust-lang.org/std/primitive.bool.html#method.then
-
 [1]: https://twitter.com/munificentbob
-[2]: type-checking *if-expressions*
-[3]: *expression-oriented* languages
-[4]: *statement-oriented* languages
-[5]: side effect
-[6]: Unit
-[7]: Absurd
-[8]: optionally-typed
-[9]: look-before-you-leap
-[10]: available as a method
-[11]: unstable Rust
-[12]: chaining methods
-[13]: sugar
-[14]: Option
-[15]: nullable values
-[16]: booleans
-[17]: pattern-matching
-[18]: structured data
-[19]: error-prone
-[20]: deeply-nested pattern-matching
-[21]: `do`
-[22]: `with`
-[23]: `use`
-[24]: Haskell
-[25]: Koka
-[26]: Gleam
+[2]: http://journal.stuffwithstuff.com/2023/01/03/type-checking-if-expressions/
+[3]: https://en.wikipedia.org/wiki/Expression-oriented_programming_language
+[4]: https://en.wikipedia.org/wiki/Imperative_programming
+[5]: https://en.wikipedia.org/wiki/Side_effect_(computer_science)
+[6]: https://en.wikipedia.org/wiki/Unit_type
+[7]: https://en.wikipedia.org/wiki/Empty_type
+[8]: https://en.wikipedia.org/wiki/Option_type
+[9]: https://wiki.c2.com/?LookBeforeYouLeap
+[10]: https://doc.rust-lang.org/std/primitive.bool.html#method.then
+[12]: https://dhghomon.github.io/easy_rust/Chapter_35.html
+[13]: https://en.wikipedia.org/wiki/Syntactic_sugar
+[15]: https://en.wikipedia.org/wiki/Nullable_type
+[16]: https://wiki.c2.com/?UseEnumsNotBooleans
+[17]: https://en.wikipedia.org/wiki/Pattern_matching
+[18]: https://en.wikipedia.org/wiki/Algebraic_data_type
+[19]: https://tuacm.com/blog/switch-statements-wont-fix-yandere-simulator/
+[20]: https://www.reddit.com/r/rust/comments/7m7rn8/avoiding_deeply_nested_matchstructures/
+[21]: https://en.wikibooks.org/wiki/Haskell/do_notation
+[22]: https://koka-lang.github.io/koka/doc/book.html#sec-with
+[23]: https://gleam.run/news/v0.25-introducing-use-expressions/
+[24]: https://www.haskell.org/
+[25]: https://koka-lang.github.io/
+[26]: https://gleam.run/
