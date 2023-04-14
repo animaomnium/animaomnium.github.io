@@ -1,7 +1,6 @@
 +++
 title = "Optional If Expressions"
-date = 2023-04-13
-draft = true
+date = 2023-04-14
 +++
 
 A while back, [Robert Nystrom][1] published a post on [type-checking *if-expressions*][2]. If-expressions are generally a feature of [*expression-oriented* languages][3], in which all language constructs produce a value. An if-expression takes on the value produced by the selected branch:
