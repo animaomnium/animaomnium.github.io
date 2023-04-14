@@ -39,8 +39,8 @@ What if single-branch if-expressions just produced an [optionally-typed][8] valu
 
 ```rust
 let quotient: Option<f64>;
-quotient = if denominator != 0.0 {
-  numerator / denominator
+quotient = if den != 0.0 {
+  num / den
 };
 ```
 
@@ -48,8 +48,8 @@ The above example would be equivalent to:
 
 ```rust
 // …
-quotient = if denominator != 0.0 {
-  Some(numerator / denominator)
+quotient = if den != 0.0 {
+  Some(num / den)
 } else {
   None
 }
@@ -61,10 +61,8 @@ Currently, this feature is [available as a method][10] on `bool` in Rust:
 
 ```rust
 // …
-quotient = (denominator != 0.0)
-  .then(|| { 
-    numerator / denominator
-  });
+quotient = (den != 0.0)
+  .then(|| num / den);
 ```
 
 While this works, and composes well when [chaining methods][12], on its own using `then` in this manner is not that readable. (It suffices to say that I'm not a huge fan of passing closure callbacks a methods.)
