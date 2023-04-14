@@ -74,7 +74,7 @@ Optional if-expressions neatly generalize the semantics of if-expressions to sin
 
 Unlike Nystrom's solution, optional if-expressions do not require keeping track of expression vs. non-expression contexts. Does this mean they're easier to implement? Not exactly. 
 
-Optional if-expressions only make sense in the context of a language with a generic Option type, a feature that is complex, which feature Nystrom's language does likely not have. Admittedly, this language feature makes more sense in a language with generic ADTs (like Rust) than the language Nystrom is writing.
+Optional if-expressions only make sense in the context of a language with a generic `Option<T>` type, a feature that is complex, which feature Nystrom's language does likely not have. Admittedly, this language feature makes more sense in a language with generic ADTs (like Rust) than the language Nystrom is writing.
 
 The question, however, of how to integrate imperative, statement-oriented if-statements in an expression-oriented language, is an interesting one. Optional if-expressions are an unambiguous syntactic transformation, [sugar][13] for a common pattern often used. While they neatly resolve a couple problems, they're not perfect:
 
