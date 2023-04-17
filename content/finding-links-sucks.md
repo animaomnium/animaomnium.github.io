@@ -116,7 +116,6 @@ import time
 # python linkoln.py INPUT.md > OUTPUT.md
 
 # Read input file name
-print(sys.argv)
 if len(sys.argv) != 2:
   print("Usage: linkoln FILE")
   exit(1)
