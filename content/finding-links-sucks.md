@@ -1,7 +1,6 @@
 +++
 title = "Finding Links Sucks"
 date = 2023-04-17
-draft = true
 +++
 
 You've spent hours absorbing [incoming][1] [bitstreams][2], and a seed of an idea has germinated in your mind. You fire up your [favorite text editor][3], plant it down, and spend a couple hours letting the idea grow out. You've finished! You are about to publish your freshly-grown bitstream on the interwebs when you get *that sinking feeling* in your gut: something's missing…
