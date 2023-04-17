@@ -97,7 +97,6 @@ Despite its simplicity, I've been getting a lot of mileage out of Linkoln. I can
 
 <details>
 <summary>The script itself is… pretty dumb.</summary>
-<br>
 
 But, since you asked for it, here it is:
 
