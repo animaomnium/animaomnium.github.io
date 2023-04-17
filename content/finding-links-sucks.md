@@ -29,7 +29,7 @@ Here's what Linkoln does, on a more concrete level. Given a Markdown post with w
 ``` 
 # Thoughts on Rust
 
-[[programming language!Rust]] is a [[systems programming language]] bootstrapped from [[rust prehistory|OCaml]].
+[[programming language:Rust]] is a [[systems programming language]] bootstrapped from [[rust prehistory|OCaml]].
 ```
 
 Linkoln normalizes the post, replacing each wikilink with the best corresponding hyperlink it could find on the web, using [Google][16]:
@@ -268,7 +268,7 @@ for entry in colophon:
 
 Linkoln is nice and all, but why worry so much about links?
 
-Linkoln is by no means a silver bullet: it's not intended to be one. The point of this post is not to highlight a throwaway python script, but to express, perhaps, a little frustration over finding links. 
+Linkoln is by no means a silver bullet: it's not intended to be one. The point of this post is not to highlight some gimmicky throwaway python script, but to express, perhaps, a little worry over why I think linking stuff is so important.
 
 Despite Linkoln using them, the need for web-wide search engines could be said to be a failure in the organizational structure of the web. As the proliferation of [GPT-4][19] leads to the crystallization of the [Dead Internet][20], how will we find a single live page in a soup of procedurally generated web-gloop?
 
@@ -276,9 +276,11 @@ Perhaps links *are* dead. Why link when ChatGPT can explain? Why post and upvote
 
 For us hobbyists, however, perhaps links *aren't* dead: they're vitally important. Links lend authority. Trace a hop away from your homepage, maybe two: can you still trust what you read? Does it matter?
 
-So in this deluge, link *more*, not less. Don't link to stuff you don't trust, SEO or otherwise. If using a tool like Linkoln—script, chatbot, or otherwise—make sure you vet what you're linking to. You are not *just* linking, but building a Web of Trust: *This* is *key*.
+So in this deluge, link *more*, not less. Don't link to stuff you don't trust, SEO or otherwise. If using a tool like Linkoln—script, chatbot, or otherwise—make sure you vet what you're linking to. You are not *just* linking, but building a Web of Trust: *this* is *key*.
 
-Links aren't dead. Neither is the old web. Keep the dream of an open web alive: Keep Stuff Linkable! Happy linking!
+Links aren't dead. Neither is the old web. Keep the dream of an open web alive: Keep Stuff Linkable! 
+
+Happy linking!
 
 [1]: https://news.ycombinator.com
 [2]: https://lobste.rs
