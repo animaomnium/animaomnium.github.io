@@ -263,8 +263,6 @@ for entry in colophon:
 
 </details>
 
-Linkoln is nice and all, but why worry so much about links?
-
 Linkoln is by no means a silver bullet: it's not intended to be one. The point of this post is not to highlight some gimmicky throwaway python script, but to express, perhaps, a little worry over why I think linking stuff is so important.
 
 Despite Linkoln using them, the need for web-wide search engines could be said to be a failure in the organizational structure of the web. As the proliferation of [GPT-4][19] leads to the crystallization of the [Dead Internet][20], how will we find a single live page in a soup of procedurally generated web-gloop?
