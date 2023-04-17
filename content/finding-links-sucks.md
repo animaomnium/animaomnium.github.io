@@ -294,7 +294,7 @@ Links aren't dead. Neither is the old web. Keep the dream of an open web alive: 
 [12]: https://en.wikipedia.org/wiki/Help:Link
 [13]: https://commonmark.org/help/
 [14]: https://en.wikipedia.org/wiki/World_Wide_Web
-[15]: https://en.wikipedia.org/wiki/Help:Link
+[15]: https://en.wikipedia.org/wiki/Hyperlink
 [16]: https://duckduckgo.com
 [17]: https://en.wikipedia.org/wiki/Concatenation
 [18]: https://www.urbandictionary.com/define.php?term=googlefoo
