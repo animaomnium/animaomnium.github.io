@@ -1,5 +1,5 @@
 +++
-title = "Finding Links Sucks"
+title = "Keep Stuff Linkable"
 date = 2023-04-17
 +++
 
