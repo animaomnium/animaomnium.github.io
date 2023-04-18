@@ -31,7 +31,7 @@ h1, h2, h3, h4, h5, h6 {
 .header, .footer {
   color: LemonChiffon;
   background-color: DarkSlateGray;
-  box-shadow: 1rem 0.5rem 0rem Snow;
+  box-shadow: 0.5rem 0rem 1rem 1rem Snow;
 }
 
 .header {
