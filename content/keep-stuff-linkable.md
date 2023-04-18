@@ -3,31 +3,31 @@ title = "Keep Stuff Linkable"
 date = 2023-04-17
 +++
 
-*2023-04-18 • Revised for clarity and style based on [feedback][0] from HN.*
+*2023-04-18 • Revised for clarity and style, with better link queries, based on [feedback][0] from HN. Thank you!*
 
-You've spent hours reading, and a seed of an idea has germinated in your mind. You fire up your [favorite text editor][3], plant it down, and spend a couple hours letting the idea grow out. You've finished! You are about to publish your freshly-grown post on the web when you get *that sinking feeling* in your gut: something's missing…
+You've spent hours reading, and a seed of an idea has germinated in your mind. You fire up your [favorite text editor][1], plant it down, and spend a couple hours letting the idea grow out. You've finished! You are about to publish your freshly-grown post on the web when you get *that sinking feeling* in your gut: something's missing…
 
 You scan over the post. Is anything wrong? Nope: argument is solid, formatting is A-Ok. But wait… what's that?
 
 Where are all the links?
 
-No [links][1], no [game][2]. (It is the *web* you are publishing to, after all.) Sighing, you stumble around with [Google][6] for a bit before giving up. Maybe some other time. If only there were a better way…
+No [links][2], no [game][3]. (It is the *web* you are publishing to, after all.) Sighing, you stumble around with [Google][4] for a bit before giving up. Maybe some other time. If only there were a better way…
 
 ## Finding links sucks
 
-It's probably a lack of [discipline][4], but keeping track of the references principally responsible for each little bit of text I write is *hard*. I have so many linkless posts waiting to be published: I could go ahead and publish them as-is, but by doing so I feel as though I'd be treating you, dear reader, unjustly.
+It's probably a lack of [discipline][5], but keeping track of the references principally responsible for each little bit of text I write is *hard*. I have so many linkless posts waiting to be published: I could go ahead and publish them as-is, but by doing so I feel as though I'd be treating you, dear reader, unjustly.
 
 It's not that I don't know what I want to link to. Most of the posts I write are responses to things I've read. I know what I want to link to, but I don't want to lose flow to hunt down a link while writing. I could go back at the end and insert links retrospectively, but it takes more time than I'd like to hop between browser, editor, and what I was thinking about at that point. It would be nice if I could mark links as I write, while still being able to refine each link in-editor as I edit and revise later.
 
-I wish there was a faster way to link the posts I write. I want to [write about things that are happening *now*][7]. If I wait a week to hunt down references, things will have already moved on. Writing consistently requires rhythm, and nothing interrupts a consistent rhythm more effectively than haphazardly tumbling down [internet rabbit-holes][9] while in search of the perfect link.
+I wish there was a faster way to link the posts I write. I want to [write about things that are happening *now*][6]. If I wait a week to hunt down references, things will have already moved on. Writing consistently requires rhythm, and nothing interrupts a consistent rhythm more effectively than haphazardly tumbling down [internet rabbit-holes][7] while in search of the perfect link.
 
-In a perfect world, I imagine a little robot reading everything alongside me. He records the references and key ideas of each piece. After I write a post, he'd comb through my post sentence by sentence, linking every important phrase to its source. Now, I haven't quite done this, but this morning I prototyped a quick-and-dirty [first-order approximation][10], which should hopefully let me link stuff with greater ease.
+In a perfect world, I imagine a little robot reading everything alongside me. He records the references and key ideas of each piece. After I write a post, he'd comb through my post sentence by sentence, linking every important phrase to its source. Now, I haven't quite done this, but this morning I prototyped a quick-and-dirty [first-order approximation][8], which should hopefully let me link stuff with greater ease.
 
 ## Prototyping Linkoln
 
-*Linkoln*, no pun intended, is the name of my robotic companion. It's a short hacky [Python][11] script I wrote this morning, which I tested against finding links for this post. It's far from perfect, but it fills the need I had and has validated building a fuller prototype. 
+*Linkoln*, no pun intended, is the name of my robotic companion. It's a short hacky [Python][9] script I wrote this morning, which I tested against finding links for this post. It's far from perfect, but it fills the need I had and has validated building a fuller prototype. 
 
-Linkoln parses [wikilinks][12] out of a [markdown][13] document, and searches the [world wide web][14] to find a [hyperlink][15] for each one. To limit the scope of this prototype, Linkoln just uses a full-web search engine. In the future, I plan to run it against my browser history, a database of articles I have saved, blogs I trust, and so on, only resorting to the public web as a last resort.
+Linkoln parses [wikilinks][10] out of a [markdown][11] document, and searches the [world wide web][12] to find a [hyperlink][13] for each one. To limit the scope of this prototype, Linkoln just uses a full-web search engine. In the future, I plan to run it against my browser history, a database of articles I have saved, blogs I trust, and so on, only resorting to the public web as a last resort.
 
 Here's what Linkoln does, on a more concrete level. Given a Markdown post with wikilinks:
 
@@ -287,15 +287,15 @@ This is *not* [Markdown][0]
 [0]: CommonMark-flavored Markdown
 ```
 
-After this, I got curiois and experimented with various kinds of queries, with different query types (e.g. web, reading list, history, etc.) disambiguated using standard DDG `bang!notation`, but decided to limit this post to web search to avoid steering the conversation into the technical weeds.
+After this, I got curious and experimented with various kinds of queries, with different query types (e.g. web, reading list, history, etc.) disambiguated using standard DDG `bang!notation`, but decided to limit this post to web search to avoid steering the conversation into the technical weeds.
 
 ## Are links dead?
 
 At this point, it should be obvious that Linkoln is, by no means, a silver bullet. It's not intended to be one. The point of this post is decidedly *not* to highlight some gimmicky throwaway python script. Instead, I hope to start a discussion on the importance of building and using tools to improve the process of writing for the web.
 
-Despite Linkoln's meta-ironic reliance on them, the need for web-wide search engines could be said to be a failure in the organizational structure of the web. As the proliferation of [GPT-4][19]-like tools (some of which can be [run in your browser][22]) lead to the crystallization of the [Dead Internet][20], how will we find a single live page in a soup of procedurally generated web-gloop?
+Despite Linkoln's meta-ironic reliance on them, the need for web-wide search engines could be said to be a failure in the organizational structure of the web. As the proliferation of [GPT-4][14]-like tools (some of which can be [run in your browser][15]) lead to the crystallization of the [Dead Internet][16], how will we find a single live page in a soup of procedurally generated web-gloop?
 
-Perhaps links *are* dead. Why link when ChatGPT can explain? Why post and upvote when [attention-maximizing algorithms][21] can recommend? Perhaps we're at the end of the old-web, now a corner relegated to hobbyists, as all text ever written is absorbed in a single differentiable scream.
+Perhaps links *are* dead. Why link when ChatGPT can explain? Why post and upvote when [attention-maximizing algorithms][17] can recommend? Perhaps we're at the end of the old-web, now a corner relegated to hobbyists, as all text ever written is absorbed in a single differentiable scream.
 
 For us hobbyists, however, perhaps links *aren't* dead: they're vitally important. Links lend authority. Trace a hop away from your homepage, maybe two: can you still trust what you read?
 
@@ -306,24 +306,20 @@ Links aren't dead. And, despite the best efforts of the incoming *Content Deluge
 Keep on linking! 
 
 [0]: https://news.ycombinator.com/item?id=35599363
-[1]: https://www.w3.org/TR/html401/struct/links.html
-[2]: https://www.w3.org/Provider/Style/URI
-[3]: https://neovim.io
+[1]: https://neovim.io
+[2]: https://www.w3.org/TR/html401/struct/links.html
+[3]: https://www.w3.org/Provider/Style/URI
 [4]: https://www.zotero.org
-[5]: https://en.wikipedia.org/wiki/Hyperlink
-[6]: https://duckduckgo.com
-[7]: https://simonwillison.net/2023/Apr/16/web-llm/
-[8]: https://blog.codinghorror.com/how-to-achieve-ultimate-blog-success-in-one-easy-step/
-[9]: https://en.m.wikipedia.org/wiki/Wikipedia:Unusual_articles
-[10]: https://en.wikipedia.org/wiki/Order_of_approximation
-[11]: https://www.python.org
-[12]: https://en.wikipedia.org/wiki/Help:Link
-[13]: https://commonmark.org/help/
-[14]: https://en.wikipedia.org/wiki/World_Wide_Web
-[15]: https://en.wikipedia.org/wiki/Hyperlink
-[16]: https://duckduckgo.com
-[17]: https://en.wikipedia.org/wiki/Concatenation
-[19]: https://openai.com/research/gpt-4
-[20]: https://www.theatlantic.com/technology/archive/2021/08/dead-internet-theory-wrong-but-feels-true/619937/
-[21]: https://gantry.io/blog/papers-to-know-20230110
-[22]: https://mlc.ai/web-llm/
+[5]: https://duckduckgo.com
+[6]: https://simonwillison.net/2023/Apr/16/web-llm/
+[7]: https://en.m.wikipedia.org/wiki/Wikipedia:Unusual_articles
+[8]: https://terrytao.wordpress.com/advice-on-writing-papers/write-a-rapid-prototype-first/
+[9]: https://www.python.org
+[10]: https://help.obsidian.md/Linking+notes+and+files/Internal+links
+[11]: https://commonmark.org/
+[12]: https://www.w3.org/MarkUp/html-test/misc/guide.html
+[13]: https://www.w3.org/TR/html401/struct/links.html
+[14]: https://openai.com/research/gpt-4
+[15]: https://mlc.ai/web-llm/
+[16]: https://www.theatlantic.com/technology/archive/2021/08/dead-internet-theory-wrong-but-feels-true/619937/
+[17]: https://gantry.io/blog/papers-to-know-20230110
