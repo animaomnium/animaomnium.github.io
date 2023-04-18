@@ -309,8 +309,8 @@ Keep on linking!
 [1]: https://neovim.io
 [2]: https://www.w3.org/TR/html401/struct/links.html
 [3]: https://www.w3.org/Provider/Style/URI
-[4]: https://www.zotero.org
-[5]: https://duckduckgo.com
+[4]: https://duckduckgo.com
+[5]: https://www.zotero.org
 [6]: https://simonwillison.net/2023/Apr/16/web-llm/
 [7]: https://en.m.wikipedia.org/wiki/Wikipedia:Unusual_articles
 [8]: https://terrytao.wordpress.com/advice-on-writing-papers/write-a-rapid-prototype-first/
