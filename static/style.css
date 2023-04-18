@@ -31,14 +31,20 @@ h1, h2, h3, h4, h5, h6 {
 .header, .footer {
   color: LemonChiffon;
   background-color: DarkSlateGray;
+  box-shadow: 1rem 0.5rem 0rem Snow;
 }
 
 .header {
   text-align: center;
+  border-radius: 0 0 1rem 1rem;
 }
 
 .content {
   padding-bottom: 3rem;
+}
+
+.footer {
+  border-radius: 1rem 1rem 0 0;
 }
 
 a {
