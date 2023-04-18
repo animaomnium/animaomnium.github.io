@@ -3,7 +3,7 @@ title = "Keep Stuff Linkable"
 date = 2023-04-17
 +++
 
-*2023-04-18 • Revised for clarity and style. Removed spurious links used to test Linkoln.*
+*2023-04-18 • Revised for clarity and style based on [feedback][0] from HN.*
 
 You've spent hours reading, and a seed of an idea has germinated in your mind. You fire up your [favorite text editor][3], plant it down, and spend a couple hours letting the idea grow out. You've finished! You are about to publish your freshly-grown post on the web when you get *that sinking feeling* in your gut: something's missing…
 
@@ -305,6 +305,7 @@ Links aren't dead. And, despite the best efforts of the incoming *Content Deluge
 
 Keep on linking! 
 
+[0]: https://news.ycombinator.com/item?id=35599363
 [1]: https://www.w3.org/TR/html401/struct/links.html
 [2]: https://www.w3.org/Provider/Style/URI
 [3]: https://neovim.io
