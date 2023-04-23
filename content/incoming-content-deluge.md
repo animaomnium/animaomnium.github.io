@@ -112,15 +112,15 @@ We have already seen countless breakdowns in communication between communities w
 
 So where does that leave us?
 
-Frankly, I remain cautiously optimistic. I believe that we have the capacity to develop the tools it will take to moderate this incoming *Content Deluge*. Moderation has always been a hard problem, but increasing outside pressure is only going to make the existing systems we have to moderate content more resilient. 
+Frankly, I remain cautiously optimistic. The technology for a true *Content Deluge* is not quite here yet. In the meantime, I believe the *capacity* needed to develop the tools it will take to moderate the incoming deluge exists. Moderation has always been a hard problem, but increasing outside pressure is only going to make the existing systems we have to moderate content more resilient. 
 
 Unlike GPT, as people, we all share the reality of *human experience*. This is a reality that can't be generated: it is a vocabulary we all share. I hope that the fundamental human need for *real* social connection—outside of the hollow digital realities we define—will drive people to seek more real-world friendships than the number of digital ones they prompt into existence. When they do, I hope that these friends look to expand the overlap between their respective vocabularies, working towards bridging the gap between their shared realities.
 
-This argument presented in this post has a fatal flaw (among many): it assumes that the path of "every individial getting lost in a private fractured reality" is the path most people will follow. In practice, however, I think the novelty will soon wear off: most people will get sick of said *Content Deluge* after a while. There are only so many procedurally generated landscapes the eyes can handle before the body wants to step away and experience *real* nature. The curse of those forced to inhabit a fractured reality will likely be relegated to those who consider themselves members of the [Eternally Online][24]. I am grateful I am not counted among their ranks.
+This argument presented in this post has at least one fatal flaw (among many): it assumes that the path of "getting lost in a private fractured reality" is the path most people will elect to follow. In practice, however, I think the novelty will soon wear off: most people will get sick of said *Content Deluge* after a while. There are only so many procedurally generated landscapes the eyes can handle before the body wants to step away and experience *real* nature. The curse of those forced to inhabit a fractured reality will likely be relegated to those who consider themselves members of the *[Eternally Online][24]*. I am grateful to not be counted among their ranks.
 
 With that in mind, as you reach the end of this post, now might be a good time to stretch, take a break, and go outside.
 
-I promise *Crash Lime* will be back to its regular programming in my next post. As much as I love waxing philosophical, I think its time we break down some code! 
+I promise *Crash Lime* will be back to its regular programming in my next post. As much as I love waxing philosophical, I think it's *finally* time we break down some more code! 
 
 In my next post, I hope to analyze the *[Compute Shaders][25] used in [Forma][26]*, or perhaps explain the elegance of the inversions of control present in *[Steven Witten's][27] excellent [Use.GPU][28]*. That's all for today, though…
 
@@ -148,7 +148,7 @@ Until next time!
 [20]: https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html
 [21]: https://andys.page/posts/how-to-draw/
 [22]: https://research.nvidia.com/labs/toronto-ai/VideoLDM/
-[24]: https://www.quora.com/Im-pretending-to-be-someone-else-online-Im-trying-to-stop-but-I-enjoy-it-Can-someone-tell-me-how-to-stop-it?share=1
+[24]: https://www.palladiummag.com/2022/11/04/i-do-not-want-to-be-an-internet-person/
 [25]: https://www.w3.org/TR/WGSL/
 [26]: https://github.com/google/forma
 [27]: https://acko.net/about/
