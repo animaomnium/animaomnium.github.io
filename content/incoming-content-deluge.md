@@ -74,11 +74,11 @@ Digital experiences generally revolve around the production or consumption of *c
 
 ## Content post-scarcity
 
-A few years ago, Tim Urban published a [popular post on AGI and the future][20]. In his post, there's a graph showing *super-exponential growth*: the curve remains basically flat, until it goes *straight vertical*. There's a stick figure standing on the flat part of the curve, just before it goes vertical, seemingly unaware. "Seems like a pretty brave place to stand," right?
+A few years ago, Tim Urban published a [popular post on AGI and the future][20]. In his post, there's a graph showing *super-exponential growth*: the curve remains basically flat, until it goes *straight vertical*. There's a stick figure standing on the flat part of the curve, just before it goes vertical, seemingly unaware. "Seems like a pretty intense place to be standing", right?
 
 > As the cost of content generation drops towards zero, content becomes a post-scarcity good, which may be tailored to each individual's taste.
 
-Although Urban was using this graph to denote runaway intelligence in the context of self-improving AI, by adopting a lens more appropriate for this article, this curve could be said to represent "the amount of content reachable by an individual on the internet increasing over time". We're still standing on flat ground for now. Yet a few years from now, someone will look back at us and quip, "2023, eh? Seems like a pretty brave place to stand."
+Although Urban was using this graph to denote runaway intelligence in the context of self-improving AI, by adopting a lens more appropriate for this article, this curve could be said to represent "the amount of content reachable by an individual on the internet increasing over time". We're still standing on flat ground for now. Yet a few years from now, someone will look back at us and quip, "2023, eh? Seems like a pretty intense place to be standing."
 
 We are standing at the edge of a *Cambrian Explosion* with respect to the depth and breadth of the type of content people are able to create and consume. Three years ago, had you told me that it took [4 Gigabytes to Draw Anything][21], I would have laughed and asked you to clarify. Now, when people [flirt][22] with the eventual reality of, say, procedurally generated Netflix, I laugh a little more nervously.
 
