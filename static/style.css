@@ -80,3 +80,7 @@ pre {
   overflow-x: scroll;
   whitespace: nowrap;
 }
+
+blockquote {
+  font-style: italic;
+}
