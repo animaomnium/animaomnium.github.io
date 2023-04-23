@@ -137,7 +137,7 @@ Until next time!
 [9]: https://arxiv.org/abs/2203.15556
 [10]: https://ai.facebook.com/blog/large-language-model-llama-meta-ai/
 [11]: https://hai.stanford.edu/news/reflections-foundation-models
-[12]: https://github.com/facebookresearch/llama/pull/109
+[12]: https://github.com/facebookresearch/llama/pull/73
 [13]: https://github.com/ggerganov
 [14]: https://openai.com/research/whisper
 [15]: https://github.com/ggerganov/whisper.cpp
