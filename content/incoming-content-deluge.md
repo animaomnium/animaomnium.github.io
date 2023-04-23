@@ -133,7 +133,7 @@ Until next time!
 [5]: https://arxiv.org/abs/2005.14165
 [6]: https://deepgenerativemodels.github.io/notes/autoregressive
 [7]: https://arxiv.org/abs/1706.03762
-[8]: https://www.incompleteideas.net/IncIdeas/BitterLesson.html
+[8]: http://www.incompleteideas.net/IncIdeas/BitterLesson.html
 [9]: https://arxiv.org/abs/2203.15556
 [10]: https://ai.facebook.com/blog/large-language-model-llama-meta-ai/
 [11]: https://hai.stanford.edu/news/reflections-foundation-models
