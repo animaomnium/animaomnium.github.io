@@ -100,7 +100,7 @@ Those who do not fall prey to the infohazards left to roam freely will have carv
 
 > This *fraying of reality* has been a long-time coming. Indeed, it is already happening today.
 
-On [YouTube alone][23], more content is uploaded in an hour than a human could possibly consume in their entire lifetime. A lot of this content, however, is subjectively garbage: how do we filter through the noise to find a diamond in the rough?
+On YouTube alone, more video is uploaded in an day than a human could possibly consume in their entire lifetime. A lot of this content, however, is subjectively garbage: how do we filter through the noise to find a diamond in the rough?
 
 By grouping people by their interests, we can amplify any diamonds found. Indeed, people are *already* grouped by their interests, whether by algorithm or self-sortedly. 
 
@@ -127,28 +127,27 @@ In my next post, I hope to analyze the *[Compute Shaders][25] used in [Forma][26
 Until next time!
 
 [1]: https://openai.com/research/gpt-2-1-5b-release
-[2]: https://github.com/openai/gym/releases
+[2]: https://github.com/openai/gym
 [3]: https://www.scu.edu/ethics/focus-areas/technology-ethics/resources/open-source-ai-to-release-or-not-to-release-the-gpt-2-synthetic-text-generator/
 [4]: https://openai.com/blog/openai-lp/
 [5]: https://arxiv.org/abs/2005.14165
-[6]: https://en.wikipedia.org/wiki/Autoregressive_model
+[6]: https://deepgenerativemodels.github.io/notes/autoregressive
 [7]: https://arxiv.org/abs/1706.03762
-[8]: https://www.cs.utexas.edu/~eunsol/courses/data/bitter_lesson.pdf
+[8]: https://www.incompleteideas.net/IncIdeas/BitterLesson.html
 [9]: https://arxiv.org/abs/2203.15556
 [10]: https://ai.facebook.com/blog/large-language-model-llama-meta-ai/
-[11]: https://research.ibm.com/blog/what-are-foundation-models
-[12]: https://github.com/LlamaTechnologies/LlamaTorrent
+[11]: https://hai.stanford.edu/news/reflections-foundation-models
+[12]: https://github.com/facebookresearch/llama/pull/109
 [13]: https://github.com/ggerganov
 [14]: https://openai.com/research/whisper
 [15]: https://github.com/ggerganov/whisper.cpp
-[16]: https://github.com/ggerganov/llama.cpp/releases
+[16]: https://github.com/ggerganov/llama.cpp
 [17]: https://simonwillison.net/2023/Mar/11/llama/
-[18]: https://ivonblog.com/en-us/posts/alpaca-cpp-termux-android/
+[18]: https://twitter.com/rgerganov/status/1635604465603473408
 [19]: https://github.com/features/preview/copilot-x
 [20]: https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html
 [21]: https://andys.page/posts/how-to-draw/
 [22]: https://research.nvidia.com/labs/toronto-ai/VideoLDM/
-[23]: https://www.oberlo.com/blog/youtube-statistics
 [24]: https://www.quora.com/Im-pretending-to-be-someone-else-online-Im-trying-to-stop-but-I-enjoy-it-Can-someone-tell-me-how-to-stop-it?share=1
 [25]: https://www.w3.org/TR/WGSL/
 [26]: https://github.com/google/forma
