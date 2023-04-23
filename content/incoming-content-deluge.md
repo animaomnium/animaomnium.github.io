@@ -9,7 +9,7 @@ date = 2023-04-24
 
 *NB: This post was fully drafted on 2023-03-12, the day before the release of GPT-4.*
 
-It was an unusually warm day in November of 2019 when I first stumbled upon [GPT-2][1]. It was a different world then—pre-pandemic, even—and there was a certain buzz in the air about the future that was unfolding.
+It was an unusually warm day in November of 2019 when I first stumbled across [GPT-2][1]. It was a different world then—pre-pandemic, even—and there was a certain buzz in the air about the future that was unfolding.
 
 OpenAI, at this time, still had a reputation for being, well, *open*. It wasn’t the ClosedAPI it is today. There was a time when the vast majority of OpenAI’s work was [open-sourced][2]: this built at least a baseline of trust.
 
