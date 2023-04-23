@@ -1,14 +1,13 @@
 +++
 title = "Incoming Content Deluge"
-date = 2023-04-23
-draft = true
+date = 2023-04-24
 +++
 
 *We don’t know what happens when the cost of content generation drops to zero, but we’re about to find out…*
 
 ## The dawn of GPT
 
-*NB: Post was drafted on 2023-03-12, the day before the release of GPT-4.*
+*NB: This post was fully drafted on 2023-03-12, the day before the release of GPT-4.*
 
 It was an unusually warm day in November of 2019 when I first stumbled upon [GPT-2][1]. It was a different world then—pre-pandemic, even—and there was a certain buzz in the air about the future that was unfolding.
 
@@ -120,7 +119,7 @@ This argument presented in this post has at least one fatal flaw (among many): i
 
 With that in mind, as you reach the end of this post, now might be a good time to stretch, take a break, and go outside.
 
-I promise *Crash Lime* will be back to its regular programming in my next post. As much as I love waxing philosophical, I think it's *finally* time we break down some more code! 
+I promise *Crash Lime* will be back to its regular programming in the next post. As much as I love waxing philosophical, I think it's *finally* time we break down some more code! 
 
 In my next post, I hope to analyze the *[Compute Shaders][25] used in [Forma][26]*, or perhaps explain the elegance of the inversions of control present in *[Steven Witten's][27] excellent [Use.GPU][28]*. That's all for today, though…
 
