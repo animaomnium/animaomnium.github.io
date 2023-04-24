@@ -17,13 +17,11 @@ It was surprising, then, that when GPT-2 was announced, it was not released to t
 
 Jump to March of 2023. Since GPT-2, language models have gone from bumbling drunk librarians to prodigal writers whose only flaw, perhaps, is a lack of grounding in reality (spooky foreshadowing). GPT-3 has shown that OpenAI’s initial safety concerns haven’t stopped them from pursuing further development (and [profit][4]) in the space.
 
-## The race to scale…
+## The race to scale
 
 At risk of repeating an explanation that has been given a thousand times, [GPT][5] stands for *General Procedural Transformer*. "Transformer" is the key word here: a *Transformer* is an [autoregressive][6] model trained on sequence prediction. The key innovation of the Transformer is the introduction of [multi-headed attention][7], which architecture is the first to practically capture the rich causal dependencies commonly found when modeling text.
 
 A [race to scale models][8] had begun: it was thought that the more parameters, the better performance. Transformers have horrible quadratic scaling properties with respect to the size of the attention window, so much research was performed to deliver ever-larger models. In the end, though, we found that under the current paradigm it was not the sheer *scale* of the model that has the largest effect on model performance, but rather the volume of *data* pushed through the model while training.
-
-## …is flipped on its head
 
 With the release of Google’s [Chinchilla][9], the unknown relationship between model size, data, and performance was finally pinned down. Chinchilla proved, against the prevailing wisdom of the time, that better models needed more *data*, not more *parameters*. Collecting high-quality data is vastly more difficult than merely turning up the parameter knob. More data-efficient architectures were needed:
 
@@ -49,11 +47,11 @@ First, I should clarify that by "content," I mean a lot more than just Text (LLa
 
 The central hypothesis of this post, containing the points most amenable to discussion, is as follows:
 
-1. Individuals are able to shape the realities they inhabit through experiences derived from the content they consume. When content is scarce, individuals share similar experiences, and inhabit similar realities. 
+1. Individuals are able to shape the *realities* they inhabit through *experiences* derived from the *content* they consume. When content is *scarce*, individuals share similar experiences, and inhabit similar realities. 
 
-2. As the cost of content generation drops towards zero, content becomes a post-scarcity good, which may be tailored to each individual's taste. When content is post-scarce, the breadth of experience increases, as does the diversity of the realities each individual may inhabit.
+2. As the cost of content generation drops towards zero, content becomes a *post-scarcity* good, which may be tailored to each individual's taste. When content is post-scarce, the *breadth* of experience increases, as does the *diversity* of the realities each individual may inhabit.
 
-3. This *fraying of reality*, so to speak, will make it much easier for individuals to be radicalized, believe false-yet-self-coherent narratives, feed infohazard-based addictions, and so on. This has been a long-time coming. Indeed, it is already happening today.
+3. When individuals share little overlap in *reality*, clear communication breaks down. This *fraying of reality*, so to speak, will make it much easier for individuals to be radicalized, believe false-yet-self-coherent narratives, feed infohazard-based addictions, and so on. This has been a long-time coming; Indeed, it is already happening today.
 
 Let's break this argument down, one point at a time.
 
@@ -89,11 +87,13 @@ When content becomes a post-scarcity good, anything you can imagine can become y
 
 You've finally reached the section with the scary title. Dont worry, it's not as bad as it sounds.
 
-> This *fraying of reality*, so to speak, will make it much easier for individuals to be radicalized, believe false-yet-self-coherent narratives, feed infohazard-based addictions, and so on.
+> When individuals share little overlap in *reality*, clear communication breaks down.
 
 People with overlapping beliefs have shared vocabulary of experiences: they inhabit similar realities because the lenses they use to process new experiences are mostly the same. In the absence of shared lenses, however, one's perceptions of events become distorted relative to another's. Without a shared vocabulary of experiences, it's not always easy to communicate what you intend to convey. Quite simply, communication breaks down when people use the same words to mean different things. 
 
-For this reason, it is only within this overlap of realities that ideas can be clearly transmitted. When anyone can generate, anything they'd like to experience *on demand*, there is a risk of people "becoming lost in their own realities". We will be left with a *Milquetoast Culture*: The shared plains of collective consciousness ravaged by attention-grabbing yet senile memetic tofu, each thought allocated to the highest bidder.
+> This *fraying of reality*, so to speak, will make it much easier for individuals to be radicalized, believe false-yet-self-coherent narratives, feed infohazard-based addictions, and so on.
+
+Because communication breaks down in the presence of misaligned vocabularies, it is only within the overlap of realities that ideas can be transmitted while maintaining their original form. When anyone can generate anything they'd like to experience *on demand*, there exists a risk of people "becoming lost in their own realities". We will be left with a so-called *Milquetoast Culture*: The shared plains of collective consciousness ravaged by a sea of memetic tofu, each thought allocated to the highest bidder.
 
 Those who do not fall prey to the infohazards left to roam freely will have carved out their own protective bubbles. Within such a bubble, it will be easy for one to reinforce their existing interpretation of reality. When any argument against a given belief can be instantly countered with an essay, an infographic, or an automatically-generated award-winning documentary film, where does that leave us?
 
