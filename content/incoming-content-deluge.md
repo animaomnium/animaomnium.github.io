@@ -9,7 +9,7 @@ date = 2023-03-12
 
 *And the long road to LLaMA.*
 
-There was a time when OpenAI had a reputation for being *open*. The vast majority of OpenAI’s work was [open-sourced][2]: It wasn’t always the *ClosedAPI* it is today.
+There was a time when OpenAI had a reputation for being *open*. Indeed, the vast majority of OpenAI’s work was [open-sourced][2]: It wasn’t always the *ClosedAPI* it is today.
 
 It was surprising, then, that GPT-2 was not released to the public when announced. OpenAI leaned heavily into the trust they had accumulated, and reassured the general public that delaying release was indeed a necessary-yet-unfortunate step, all in the name of [safety][3]. GPT-2 marked a turning point in OpenAI’s *modus operandi*, but this post is about LLMs; let’s leave OpenAI for another time.
 
