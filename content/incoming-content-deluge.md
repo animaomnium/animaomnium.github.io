@@ -45,25 +45,29 @@ What happens when the cost of content generation drops to zero?
 
 First, I should clarify that by "content," I mean a lot more than just Text (LLaMA) and Images (Stable Diffusion). It would be silly to believe that there’s *not* a team of researchers at Google scraping YouTube trying to do the same for video. How long until GitHub releases *CodeMonkey*, “a one-click solution for turning issues into PRs”? We don’t know, but probably [sooner][19] than anyone expects.
 
+The unique innovation of models like LLaMA and Stable Diffusion is that they run on commodity hardware. Programs have close to zero-marginal cost to be copied: indeed, anything that can run on commodity hardware will eventually be provided as a free service to the average user. When there's "a LLaMA for everything", there will be no limit to the types of experiences people are able to generate at little-to-no cost to themselves. Content becomes a post-scarcity good.
+
 The central hypothesis of this post, containing the points most amenable to discussion, is as follows:
 
 1. Individuals are able to shape the *realities* they inhabit through *experiences* derived from the *content* they consume. When content is *scarce*, individuals share similar experiences, and inhabit similar realities. 
 
 2. As the cost of content generation drops towards zero, content becomes a *post-scarcity* good, which may be tailored to each individual's taste. When content is post-scarce, the *breadth* of experience increases, as does the *diversity* of the realities each individual may inhabit.
 
-3. When individuals share little overlap in *reality*, clear communication breaks down. This *fraying of reality*, so to speak, will make it much easier for individuals to be radicalized, believe false-yet-self-coherent narratives, feed infohazard-based addictions, and so on. This has been a long-time coming; Indeed, it is already happening today.
+3. When individuals share little overlap in *reality*, clear communication breaks down. This *fraying of reality*, so to speak, will make it much easier for individuals to believe false-yet-self-coherent narratives and feed infohazard-based addictions. This has been a long-time coming; Indeed, it is already happening today.
 
 Let's break this argument down, one point at a time.
 
 ## Experience defines reality
 
-> Individuals are able to shape the realities they inhabit through experiences derived from the content they consume.
+Let's start by breaking down the first point:
+
+> 1\. Individuals are able to shape the *realities* they inhabit through *experiences* derived from the *content* they consume.
 
 It's first important to establish that the experiences people have define the *reality* they inhabit. In this context, I'm defining the word "reality" to describe, abstractly, the way an individual "makes sense of the world", or concretely, "the set of beliefs people hold against their subjective experiences". People with overlapping beliefs inhabit overlapping realities; it is only within this overlap that ideas can be clearly transmitted, but more on that later.
 
 We can't help but process new experiences through the lens of old ones. It is only when we encounter a new experience that *does not* match our existing reality that we reweigh the set of beliefs we hold. 
 
-> When content is scarce, individuals share similar experiences, and inhabit similar realities. 
+> When content is *scarce*, individuals share similar experiences, and inhabit similar realities. 
 
 Increasingly, for better or (likely) worse, more and more of the experiences we have happen online. Most people can navigate their desktop or homescreen about as well as they can navigate their own home. In terms of the mental energy used to maintain them, digital places are not any less *real* (using the above definition of *reality*) than the physical spaces we inhabit.
 
@@ -73,13 +77,13 @@ Digital experiences generally revolve around the production or consumption of *c
 
 A few years ago, Tim Urban published a [popular post on AGI and the future][20]. In his post, there's a graph showing *super-exponential growth*: the curve remains basically flat, until it goes *straight vertical*. There's a stick figure standing on the flat part of the curve, just before it goes vertical, seemingly unaware. "Seems like a pretty intense place to be standing", right?
 
-> As the cost of content generation drops towards zero, content becomes a post-scarcity good, which may be tailored to each individual's taste.
+> 2\. As the cost of content generation drops towards zero, content becomes a *post-scarcity* good, which may be tailored to each individual's taste.
 
 Although Urban was using this graph to denote runaway intelligence in the context of self-improving AI, by adopting a lens more appropriate for this article, this curve could be said to represent "the amount of content reachable by an individual on the internet over time". We're still standing on flat ground for now. Yet a few years from now, someone will look back at us and quip, "2023, eh? Seems like a pretty intense place to be standing."
 
 We are standing at the edge of a *Cambrian Explosion* with respect to the depth and breadth of the type of content people are able to create and consume. Three years ago, had you told me that it took *[4 Gigabytes to Draw Anything][21]*, I would have laughed and asked you to clarify. Now, when people [flirt][22] with the eventual reality of, say, procedurally generated Netflix, I laugh a little more nervously.
 
-> When content is post-scarce, the breadth of experience increases, as does the diversity of the realities each individual may inhabit.
+> When content is post-scarce, the *breadth* of experience increases, as does the *diversity* of the realities each individual may inhabit.
 
 When content becomes a post-scarcity good, anything you can imagine can become your reality. This future, if true, is as terrifying as it sounds. 
 
@@ -87,11 +91,11 @@ When content becomes a post-scarcity good, anything you can imagine can become y
 
 You've finally reached the section with the scary title. Dont worry, it's not as bad as it sounds.
 
-> When individuals share little overlap in *reality*, clear communication breaks down.
+> 3\. When individuals share little overlap in *reality*, clear communication breaks down.
 
 People with overlapping beliefs have shared vocabulary of experiences: they inhabit similar realities because the lenses they use to process new experiences are mostly the same. In the absence of shared lenses, however, one's perceptions of events become distorted relative to another's. Without a shared vocabulary of experiences, it's not always easy to communicate what you intend to convey. Quite simply, communication breaks down when people use the same words to mean different things. 
 
-> This *fraying of reality*, so to speak, will make it much easier for individuals to be radicalized, believe false-yet-self-coherent narratives, feed infohazard-based addictions, and so on.
+> This *fraying of reality*, so to speak, will make it much easier for individuals to believe false-yet-self-coherent narratives and feed infohazard-based addictions.
 
 Because communication breaks down in the presence of misaligned vocabularies, it is only within the overlap of realities that ideas can be transmitted while maintaining their original form. When anyone can generate anything they'd like to experience *on demand*, there exists a risk of people "becoming lost in their own realities". We will be left with a so-called *Milquetoast Culture*: The shared plains of collective consciousness ravaged by a sea of memetic tofu, each thought allocated to the highest bidder.
 
