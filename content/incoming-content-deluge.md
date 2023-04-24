@@ -1,25 +1,21 @@
 +++
 title = "Incoming Content Deluge"
-date = 2023-04-24
+date = 2023-03-12
 +++
 
-*We don’t know what happens when the cost of content generation drops to zero, but we’re about to find out…*
+*What happens when the cost of content generation drops to zero?*
 
 ## The dawn of GPT
 
-*NB: This post was fully drafted on 2023-03-12, the day before the release of GPT-4.*
-
-It was an unusually warm day in November of 2019 when I first stumbled across [GPT-2][1]. It was a different world then—pre-pandemic, even—and there was a certain buzz in the air about the future that was unfolding.
-
-OpenAI, at this time, still had a reputation for being, well, *open*. It wasn’t the ClosedAPI it is today. There was a time when the vast majority of OpenAI’s work was [open-sourced][2]: this built at least a baseline of trust.
+It was an unusually warm day in November of 2019 when I first stumbled across [GPT-2][1]. OpenAI, at this time, still had a reputation for being, well, *open*. It wasn’t the *ClosedAPI* it is today. There was a time when the vast majority of OpenAI’s work was [open-sourced][2]: this built at least a baseline of trust.
 
 It was surprising, then, that when GPT-2 was announced, it was not released to the public. OpenAI leaned heavily into the trust they had accumulated, and reassured the general public that delaying release was indeed a necessary-yet-unfortunate step, all in the name of [safety][3]. GPT-2 marked a turning point in OpenAI’s *modus operandi*, but this post is about LLMs; let’s leave OpenAI for another time.
 
-Jump to March of 2023. Since GPT-2, language models have gone from bumbling drunk librarians to prodigal writers whose only flaw, perhaps, is a lack of grounding in reality (spooky foreshadowing). GPT-3 has shown that OpenAI’s initial safety concerns haven’t stopped them from pursuing further development (and [profit][4]) in the space.
+Jump to March of 2023. Since GPT-2, language models have gone from bumbling drunk librarians to prodigal writers whose only flaw, perhaps, is a lack of grounding in reality. GPT-3 has shown that OpenAI’s initial safety concerns haven’t stopped them from pursuing further development (and [profit][4]) in the space.
 
 ## The race to scale
 
-At risk of repeating an explanation that has been given a thousand times, [GPT][5] stands for *General Procedural Transformer*. "Transformer" is the key word here: a *Transformer* is an [autoregressive][6] model trained on sequence prediction. The key innovation of the Transformer is the introduction of [multi-headed attention][7], which architecture is the first to practically capture the rich causal dependencies commonly found when modeling text.
+At risk of repeating an explanation that has been given a thousand times, [GPT][5] stands for *General Procedural Transformer*. "Transformer" is the key word here: a *Transformer* is a type of [autoregressive][6] model trained on sequence prediction. The key innovation of the Transformer is the introduction of [multi-headed attention][7], which architecture is the first to practically capture the rich causal dependencies commonly found when modeling text. Long story short, Transformers are really good at generating text, or anything else that can be flattened into a 1D sequence.
 
 A [race to scale models][8] had begun: it was thought that the more parameters, the better performance. Transformers have horrible quadratic scaling properties with respect to the size of the attention window, so much research was performed to deliver ever-larger models. In the end, though, we found that under the current paradigm it was not the sheer *scale* of the model that has the largest effect on model performance, but rather the volume of *data* pushed through the model while training.
 
@@ -101,7 +97,7 @@ Because communication breaks down in the presence of misaligned vocabularies, it
 
 Those who do not fall prey to the infohazards left to roam freely will have carved out their own protective bubbles. Within such a bubble, it will be easy for one to reinforce their existing interpretation of reality. When any argument against a given belief can be instantly countered with an essay, an infographic, or an automatically-generated award-winning documentary film, where does that leave us?
 
-> This *fraying of reality* has been a long-time coming. Indeed, it is already happening today.
+> This fraying of reality has been a long-time coming. Indeed, it is already happening today.
 
 On YouTube alone, more video is uploaded in an day than a human could possibly consume in their entire lifetime. A lot of this content, however, is subjectively garbage: how do we filter through the noise to find a diamond in the rough?
 
@@ -122,12 +118,6 @@ Unlike GPT, as people, we all share the reality of *human experience*. This is a
 This argument presented in this post has at least one fatal flaw (among many): it assumes that the path of "getting lost in a private fractured reality" is the path most people will elect to follow. In practice, however, I think the novelty will soon wear off: most people will get sick of said *Content Deluge* after a while. There are only so many procedurally generated landscapes the eyes can handle before the body wants to step away and experience *real* nature. The curse of those forced to inhabit a fractured reality will likely be relegated to those who consider themselves members of the *[Eternally Online][24]*. I am grateful to not be counted among their ranks.
 
 With that in mind, as you reach the end of this post, now might be a good time to stretch, take a break, and go outside.
-
-I promise *Crash Lime* will be back to its regular programming in the next post. As much as I love waxing philosophical, I think it's *finally* time we break down some more code! 
-
-In my next post, I hope to analyze the *[Compute Shaders][25] used in [Forma][26]*, or perhaps explain the elegance of the inversions of control present in *[Steven Witten's][27] excellent [Use.GPU][28]*. That's all for today, though…
-
-Until next time!
 
 [1]: https://openai.com/research/gpt-2-1-5b-release
 [2]: https://github.com/openai/gym
