@@ -7,9 +7,9 @@ date = 2023-03-12
 
 ## The dawn of GPT
 
-It was an unusually warm day in November of 2019 when I first stumbled across [GPT-2][1]. OpenAI, at this time, still had a reputation for being, well, *open*. It wasn’t the *ClosedAPI* it is today. There was a time when the vast majority of OpenAI’s work was [open-sourced][2]: this built at least a baseline of trust.
+It was an unusually warm day in November of 2019 when I first stumbled across [GPT-2][1]. OpenAI still had a reputation for being *open*: It wasn’t the *ClosedAPI* it is today.
 
-It was surprising, then, that when GPT-2 was announced, it was not released to the public. OpenAI leaned heavily into the trust they had accumulated, and reassured the general public that delaying release was indeed a necessary-yet-unfortunate step, all in the name of [safety][3]. GPT-2 marked a turning point in OpenAI’s *modus operandi*, but this post is about LLMs; let’s leave OpenAI for another time.
+There was a time when the vast majority of OpenAI’s work was [open-sourced][2]: this built at least a baseline of trust. It was surprising, then, that GPT-2 was not released to the public upon release. OpenAI leaned heavily into the trust they had accumulated, and reassured the general public that delaying release was indeed a necessary-yet-unfortunate step, all in the name of [safety][3]. GPT-2 marked a turning point in OpenAI’s *modus operandi*, but this post is about LLMs; let’s leave OpenAI for another time.
 
 Jump to March of 2023. Since GPT-2, language models have gone from bumbling drunk librarians to prodigal writers whose only flaw, perhaps, is a lack of grounding in reality. GPT-3 has shown that OpenAI’s initial safety concerns haven’t stopped them from pursuing further development (and [profit][4]) in the space.
 
@@ -29,7 +29,7 @@ LLaMA (Large Language Model Meta AI) is a set of [foundation models][11] release
 
 Georgi Gerganov ([ggerganov][13]) has a reputation for packaging up released models so that they can be run by anyone possessing free time and a little grit. When the weights for [Whisper][14] (OpenAI’s speech transcription AI) were released, ggerganov developed [whisper.cpp][15], a self-contained program allowing anyone to run the model locally. With the release of LLaMA, [ggernov/llama.cpp][16] followed shortly thereafter. Now anyone with access to a decent GPU or M1 Macbook can run LLaMA locally.
 
-Willison, in his post *[LLMs are having a Stable Diffusion Moment][17]* aptly comments that running LLaMA locally is more of a proof-of-concept than anything else. He was, however, able to get the 13B parameter model, with performance similar to GPT-3, running on his machine. With much faith in EleutherAI &co., I have no doubt that LLaMA—much after the pattern of Stable Diffusion before it—will soon be replicated and improved upon in an unceasing viral cycle.
+Willison, in his post *[LLMs are having a Stable Diffusion Moment][17]* aptly comments that running LLaMA locally is more of a proof-of-concept than anything else. He was, however, able to get the 13B parameter model, with performance similar to GPT-3, running on his machine. With much faith in EleutherAI *et al.* (flagbearers of open AI since OpenAI's departure), I have no doubt that LLaMA will soon be replicated and improved upon in an unceasing viral cycle, much after the pattern of Stable Diffusion before it.
 
 A little at first, then all at once, Pandora’s box is now open. What happens when anyone can run a LLM on their laptop? On their [phone][18]? This is what keeps me up at night.
 
@@ -85,7 +85,7 @@ When content becomes a post-scarcity good, anything you can imagine can become y
 
 ## The fraying of reality
 
-You've finally reached the section with the scary title. Dont worry, it's not as bad as it sounds.
+You've finally reached the section with the scary title. It's not as bad as it sounds.
 
 > 3\. When individuals share little overlap in *reality*, clear communication breaks down.
 
