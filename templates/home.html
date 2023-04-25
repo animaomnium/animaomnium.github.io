@@ -3,7 +3,7 @@
 {{ section.content | safe }}
 <h1>Archive</h1>
 {% for post in section.pages %}
-{% if post.extra.ranty | not %}
+  {% if post.extra.ranty %}{% continue % }{% endif %}
   <p>
     <a href="{{ post.permalink }}">{{ post.title }}</a><br>
     <i>
@@ -11,6 +11,5 @@
       {{ post.reading_time }} minute{{ post.reading_time | pluralize }} required
     </i>
   </p>
-{% endif %}
 {% endfor %}
 {% endblock %}
