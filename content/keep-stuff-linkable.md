@@ -301,7 +301,7 @@ For us hobbyists, however, perhaps links *aren't* dead: they're vitally importan
 
 So in this deluge, link *more*, not less. Don't link to stuff you don't trust. Black-boxes that spit out links, like Linkoln, will only become more common in the future. With that in mind, when using a tool like Linkoln—script, chatbot, or otherwise—make sure you *thoroughly* vet what you're linking to. Remember that you are not *just* linking, but building a *Web of Trust*. Links need to be a *signal* that cuts through the noise, not vice-versa.
 
-Links aren't dead. And, despite the best efforts of the incoming *Content Deluge*, neither is the old web. Keep the dream of an open web alive: 
+Links aren't dead. And, despite the best efforts of the [incoming *Content Deluge*][18], neither is the old web. Keep the dream of an open web alive: 
 
 Keep on linking! 
 
@@ -323,3 +323,4 @@ Keep on linking!
 [15]: https://mlc.ai/web-llm/
 [16]: https://www.theatlantic.com/technology/archive/2021/08/dead-internet-theory-wrong-but-feels-true/619937/
 [17]: https://gantry.io/blog/papers-to-know-20230110
+[18]: https://animaomnium.github.io/incoming-content-deluge
