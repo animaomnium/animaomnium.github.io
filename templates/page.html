@@ -7,10 +7,14 @@
 </i></p>
 <h1>{{ page.title }}</h1>
 {{ page.content | safe }}
+{% if page.extra.ranty %}
+<p><em>NB: As this post is a rant, it is not publicly visible.</em></p>
+{% else %}
 <p><i>
   <a href="https://lobste.rs/stories/new?url={{ page.permalink | urlencode }}">Lobsters</a> •
   <a href="https://news.ycombinator.com/submitlink?u={{ page.permalink | urlencode }}&t={{ page.title | urlencode }}">HN</a> •
   <a href="https://www.reddit.com/submit?url={{ page.permalink | urlencode }}">Reddit</a> •
   <a href="http://twitter.com/share?url={{ page.permalink | urlencode }}&text={{ page.title | urlencode }}">Twitter</a>
 </i></p>
+{% endif %}
 {% endblock %}
