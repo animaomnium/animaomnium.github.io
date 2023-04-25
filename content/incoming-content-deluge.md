@@ -1,6 +1,8 @@
 +++
 title = "Incoming Content Deluge"
 date = 2023-03-12
+[extra]
+ranty = true
 +++
 
 *What happens when the cost of content generation drops to zero?*
