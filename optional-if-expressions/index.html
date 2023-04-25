@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+  <title>Optional If Expressions (Crash Lime)</title>
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css" />
+  <link rel="stylesheet" href="/style.css" />
+   
+</head>
+<body style="overflow-x: hidden">
+<div class="header">
+  <p><i>We interrupt this doomscroll <br>to bring you...</i></p>
+  <h1><a class="nolink" href="/">Crash Lime</a></h1>
+  <p>Delicious performance <br>64 bites at a time!</p>
+</div>
+<div class="content">
+<p><i>
+  2023-04-14 •
+  5 minutes required •
+  <a href="https://github.com/animaomnium">Anima Omnium</a>
+</i></p>
+<h1>Optional If Expressions</h1>
+<p>A while back, <a href="https://twitter.com/munificentbob">Robert Nystrom</a> published a post on <a href="http://journal.stuffwithstuff.com/2023/01/03/type-checking-if-expressions/">type-checking <em>if-expressions</em></a>. If-expressions are generally a feature of <a href="https://en.wikipedia.org/wiki/Expression-oriented_programming_language"><em>expression-oriented</em> languages</a>, in which all language constructs produce a value. An if-expression takes on the value produced by the selected branch:</p>
+<pre data-lang="rust" style="background-color:#212121;color:#eeffff;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#4a4a4a;">// Using Rust for this post
+</span><span style="font-style:italic;color:#c792ea;">let</span><span> title </span><span style="color:#89ddff;">= </span><span style="font-style:italic;color:#c792ea;">if</span><span> favorite </span><span style="color:#89ddff;">{
+</span><span>  </span><span style="color:#89ddff;">&quot;</span><span style="color:#c3e88d;">Best Muffin Recipe</span><span style="color:#89ddff;">&quot;
+</span><span style="color:#89ddff;">} </span><span style="font-style:italic;color:#c792ea;">else </span><span style="color:#89ddff;">{
+</span><span>  </span><span style="color:#89ddff;">&quot;</span><span style="color:#c3e88d;">Decent Muffin Recipe</span><span style="color:#89ddff;">&quot;
+</span><span style="color:#89ddff;">};
+</span></code></pre>
+<p>Because if-expressions must produce a value, an <code>else</code> branch is needed; because either branch could be taken, both branches must produce a value of the same type.</p>
+<p>In <a href="https://en.wikipedia.org/wiki/Imperative_programming"><em>statement-oriented</em> languages</a>, however, it is common to write if-statements without a trailing <code>else</code>, because they perform a <a href="https://en.wikipedia.org/wiki/Side_effect_(computer_science)">side effect</a> rather than producing a useful value:</p>
+<pre data-lang="rust" style="background-color:#212121;color:#eeffff;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#c792ea;">let</span><span> mersenne </span><span style="color:#89ddff;">= </span><span style="color:#f78c6c;">2.</span><span style="color:#82aaff;">pow_i</span><span style="color:#89ddff;">(</span><span>n</span><span style="color:#89ddff;">) - </span><span style="color:#f78c6c;">1</span><span style="color:#89ddff;">;
+</span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#82aaff;">is_prime</span><span style="color:#89ddff;">(</span><span>mersenne</span><span style="color:#89ddff;">) {
+</span><span>  println!</span><span style="color:#89ddff;">(&quot;</span><span style="color:#c3e88d;">Found prime: </span><span>{}</span><span style="color:#89ddff;">&quot;,</span><span> mersenne</span><span style="color:#89ddff;">);
+</span><span style="color:#89ddff;">}
+</span></code></pre>
+<p>This is a super-common pattern in real-world code. Quoting Nystrom:</p>
+<blockquote>
+<p>[…] in imperative code, it’s obviously common to have <code>if</code>s whose main purpose is a side effect and where an <code>else</code> clause isn’t needed. In fact, when I analyzed a huge corpus of real-world Dart, I found that only about 20% of <code>if</code> statements had <code>else</code> branches.</p>
+</blockquote>
+<p>It is possible, however, for an expression-oriented language to have if-expressions without <code>else</code> branches. If the <code>if</code> doesn’t produce a ‘value’ (e.g. produces <a href="https://en.wikipedia.org/wiki/Unit_type">Unit</a> or <a href="https://en.wikipedia.org/wiki/Empty_type">Absurd</a>) or the value produced is never consumed, then an <code>else</code> branch is obviously not required.</p>
+<p>Nystrom goes on to explain his approach for keeping track of whether the context will consume the value or not, so that it is possible to write single-branch if-expressions in non-expression contexts. (Nystrom goes a step further by relaxing the ‘same-type’ constraint in contexts where the value is not used.)</p>
+<p>While keeping track of contexts works well in interpreted languages, there’s a simple way to adapt if-expressions so that they work in expression context:</p>
+<p>What if single-branch if-expressions just produced an <a href="https://en.wikipedia.org/wiki/Option_type">optionally-typed</a> value? To illustrate:</p>
+<pre data-lang="rust" style="background-color:#212121;color:#eeffff;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#c792ea;">let</span><span> quotient</span><span style="color:#89ddff;">: </span><span style="color:#ffcb6b;">Option</span><span style="color:#89ddff;">&lt;</span><span style="font-style:italic;color:#c792ea;">f64</span><span style="color:#89ddff;">&gt;;
+</span><span>quotient </span><span style="color:#89ddff;">= </span><span style="font-style:italic;color:#c792ea;">if</span><span> den </span><span style="color:#89ddff;">!= </span><span style="color:#f78c6c;">0.0 </span><span style="color:#89ddff;">{
+</span><span>  num </span><span style="color:#89ddff;">/</span><span> den
+</span><span style="color:#89ddff;">};
+</span></code></pre>
+<p>The above example would be equivalent to:</p>
+<pre data-lang="rust" style="background-color:#212121;color:#eeffff;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#4a4a4a;">// …
+</span><span>quotient </span><span style="color:#89ddff;">= </span><span style="font-style:italic;color:#c792ea;">if</span><span> den </span><span style="color:#89ddff;">!= </span><span style="color:#f78c6c;">0.0 </span><span style="color:#89ddff;">{
+</span><span>  </span><span style="color:#ffcb6b;">Some</span><span style="color:#89ddff;">(</span><span>num </span><span style="color:#89ddff;">/</span><span> den</span><span style="color:#89ddff;">)
+</span><span style="color:#89ddff;">} </span><span style="font-style:italic;color:#c792ea;">else </span><span style="color:#89ddff;">{
+</span><span>  </span><span style="color:#ffcb6b;">None
+</span><span style="color:#89ddff;">}
+</span></code></pre>
+<p>This pattern could be useful for <a href="https://wiki.c2.com/?LookBeforeYouLeap">look-before-you-leap</a> type contexts, where a potentially fallible expression needs to check some preconditions before running.</p>
+<p>Currently, this feature is <a href="https://doc.rust-lang.org/std/primitive.bool.html#method.then">available as a method</a> on <code>bool</code> in Rust:</p>
+<pre data-lang="rust" style="background-color:#212121;color:#eeffff;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#4a4a4a;">// …
+</span><span>quotient </span><span style="color:#89ddff;">= (</span><span>den </span><span style="color:#89ddff;">!= </span><span style="color:#f78c6c;">0.0</span><span style="color:#89ddff;">)
+</span><span>  </span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">then</span><span style="color:#89ddff;">(|| </span><span>num </span><span style="color:#89ddff;">/</span><span> den</span><span style="color:#89ddff;">);
+</span></code></pre>
+<p>While this works, and composes well when <a href="https://dhghomon.github.io/easy_rust/Chapter_35.html">chaining methods</a>, on its own using <code>then</code> in this manner is not that readable. (It suffices to say that I’m not a huge fan of passing closure callbacks a methods.)</p>
+<p>Optional if-expressions neatly generalize the semantics of if-expressions to single-branch contexts. As a plus, the language is no longer required to differentiate between if-statements and if-expressions, because both one-armed and two-armed variants now produce a useful value.</p>
+<p>Unlike Nystrom’s solution, optional if-expressions do not require keeping track of expression vs. non-expression contexts. Does this mean they’re easier to implement? Not exactly. </p>
+<p>Optional if-expressions only make sense in the context of a language with a generic <code>Option&lt;T&gt;</code> type, a feature that is complex, which feature Nystrom’s language does likely not have. Admittedly, this language feature makes more sense in a language with generic ADTs (like Rust) than the language Nystrom is writing.</p>
+<p>The question, however, of how to integrate imperative, statement-oriented if-statements in an expression-oriented language, is an interesting one. Optional if-expressions are an unambiguous syntactic transformation, <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">sugar</a> for a common pattern often used. While they neatly resolve a couple problems, they’re not perfect:</p>
+<p>I’m not a huge fan of the implicit introduction of the <a href="https://en.wikipedia.org/wiki/Option_type">Option</a> type. In a language like Rust, implicitly introducing <code>Option</code> is <em>barely</em> acceptable: <code>Option</code> is already a priveleged type, and ‘accidentally’ assigning such an optional if-expression to a variable will likely cause a type mismatch error, caught by the compiler.</p>
+<p>In a dynamically-typed language with <a href="https://en.wikipedia.org/wiki/Nullable_type">nullable values</a>, the idea of <em>nullable</em> if-expressions is a terrible one. Normally, we have to check for null values before performing an action. A nullable if-expression performs this check, but discards the result. The difference between optional and nullable if-expressions is the same as the difference between <a href="https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/">parsing and validating</a>. Optional if-expressions reify the check, producing a wrapped value; nullable if-expressions do no such thing.</p>
+<p>Taking a step back, in all honesty, I’m not a huge fan of if-expressions and, well, <a href="https://wiki.c2.com/?UseEnumsNotBooleans">booleans</a> in general. In the long run, I think that <a href="https://en.wikipedia.org/wiki/Pattern_matching">pattern-matching</a> on <a href="https://en.wikipedia.org/wiki/Algebraic_data_type">structured data</a> is a much cleaner and less <a href="https://tuacm.com/blog/switch-statements-wont-fix-yandere-simulator/">error-prone</a> route. The issue of <a href="https://www.reddit.com/r/rust/comments/7m7rn8/avoiding_deeply_nested_matchstructures/">deeply-nested pattern-matching</a> can be resolved with a little sugar (e.g. <a href="https://en.wikibooks.org/wiki/Haskell/do_notation"><code>do</code></a>/<a href="https://koka-lang.github.io/koka/doc/book.html#sec-with"><code>with</code></a>/<a href="https://gleam.run/news/v0.25-introducing-use-expressions/"><code>use</code></a> notation in <a href="https://www.haskell.org/">Haskell</a>/<a href="https://koka-lang.github.io/">Koka</a>/<a href="https://gleam.run/">Gleam</a>): there’s no reason not to <code>match</code>!</p>
+<p>But until then, let’s at least make the if-expressions we have now a little nicer! </p>
+
+
+<p><i>
+  <a href="https://lobste.rs/stories/new?url=https%3A&#x2F;&#x2F;animaomnium.github.io&#x2F;optional-if-expressions&#x2F;">Lobsters</a> •
+  <a href="https://news.ycombinator.com/submitlink?u=https%3A&#x2F;&#x2F;animaomnium.github.io&#x2F;optional-if-expressions&#x2F;&t=Optional%20If%20Expressions">HN</a> •
+  <a href="https://www.reddit.com/submit?url=https%3A&#x2F;&#x2F;animaomnium.github.io&#x2F;optional-if-expressions&#x2F;">Reddit</a> •
+  <a href="http://twitter.com/share?url=https%3A&#x2F;&#x2F;animaomnium.github.io&#x2F;optional-if-expressions&#x2F;&text=Optional%20If%20Expressions">Twitter</a>
+</i></p>
+
+</div>
+<div class="footer">
+  <p><i>Thank you for tuning in!</i></p>
+  <p>Check out more posts by heading <a href="/">Home</a>.</p>
+  <p>Subscribe to this blog via <a href="/atom.xml">Atom/RSS</a>.</p>
+  <p>Copyright © 20xx Insert Employer Here, All Limes Preserved.</p>
+</div>
+</body>
+</html>

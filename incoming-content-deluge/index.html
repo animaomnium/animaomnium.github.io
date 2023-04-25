@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+  <title>Incoming Content Deluge (Crash Lime)</title>
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css" />
+  <link rel="stylesheet" href="/style.css" />
+   
+</head>
+<body style="overflow-x: hidden">
+<div class="header">
+  <p><i>We interrupt this doomscroll <br>to bring you...</i></p>
+  <h1><a class="nolink" href="/">Crash Lime</a></h1>
+  <p>Delicious performance <br>64 bites at a time!</p>
+</div>
+<div class="content">
+<p><i>
+  2023-03-12 •
+  13 minutes required •
+  <a href="https://github.com/animaomnium">Anima Omnium</a>
+</i></p>
+<h1>Incoming Content Deluge</h1>
+<p><em>What happens when the cost of content generation drops to zero?</em></p>
+<h2 id="the-dawn-of-gpt">The dawn of GPT</h2>
+<p><em>And the long road to LLaMA.</em></p>
+<p>There was a time when OpenAI had a reputation for being <em>open</em>. Indeed, the vast majority of OpenAI’s work was <a href="https://github.com/openai/gym">open-sourced</a>: It wasn’t always the <em>ClosedAPI</em> it is today.</p>
+<p>It was surprising, then, that GPT-2 was not released to the public when announced. OpenAI leaned heavily into the trust they had accumulated, and reassured the general public that delaying release was indeed a necessary-yet-unfortunate step, all in the name of <a href="https://www.scu.edu/ethics/focus-areas/technology-ethics/resources/open-source-ai-to-release-or-not-to-release-the-gpt-2-synthetic-text-generator/">safety</a>. GPT-2 marked a turning point in OpenAI’s <em>modus operandi</em>, but this post is about LLMs; let’s leave OpenAI for another time.</p>
+<p>Jump to March of 2023. Since GPT-2, language models have gone from bumbling drunk librarians to prodigal writers whose only flaw, perhaps, is a lack of grounding in reality. GPT-3 has shown that OpenAI’s initial safety concerns haven’t stopped them from pursuing further development (and <a href="https://openai.com/blog/openai-lp/">profit</a>) in the space.</p>
+<h2 id="the-race-to-scale">The race to scale</h2>
+<p>At risk of repeating an explanation that has been given a thousand times, <a href="https://arxiv.org/abs/2005.14165">GPT</a> stands for <em>General Procedural Transformer</em>. “Transformer” is the key word here: a <em>Transformer</em> is a type of <a href="https://deepgenerativemodels.github.io/notes/autoregressive">autoregressive</a> model trained on sequence prediction. The key innovation of the Transformer is the introduction of <a href="https://arxiv.org/abs/1706.03762">multi-headed attention</a>, which architecture is the first to practically capture the rich causal dependencies commonly found when modeling text. Long story short, Transformers are really good at generating text, or anything else that can be flattened into a 1D sequence.</p>
+<p>A <a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">race to scale models</a> had begun: it was thought that the more parameters, the better performance. Transformers have horrible quadratic scaling properties with respect to the size of the attention window, so much research was performed to deliver ever-larger models. In the end, though, we found that under the current paradigm it was not the sheer <em>scale</em> of the model that has the largest effect on model performance, but rather the volume of <em>data</em> pushed through the model while training.</p>
+<p>With the release of Google’s <a href="https://arxiv.org/abs/2203.15556">Chinchilla</a>, the unknown relationship between model size, data, and performance was finally pinned down. Chinchilla proved, against the prevailing wisdom of the time, that better models needed more <em>data</em>, not more <em>parameters</em>. Collecting high-quality data is vastly more difficult than merely turning up the parameter knob. More data-efficient architectures were needed:</p>
+<p>Enter <a href="https://ai.facebook.com/blog/large-language-model-llama-meta-ai/">LLaMA</a>.</p>
+<h2 id="llama-runs-locally">LLaMA runs locally</h2>
+<p>LLaMA (Large Language Model Meta AI) is a set of <a href="https://hai.stanford.edu/news/reflections-foundation-models">foundation models</a> released by Facebook AI Research (FAIR). LLaMA is the first language model with performance “similar” to GPT-3 small enough to <em>run locally</em>. Although FAIR originally planned a limited rollout to trusted organizations and researchers, in an ironic twist of fate, the <a href="https://github.com/facebookresearch/llama/pull/73">model parameters were leaked</a>, and the cat is now out of the bag.</p>
+<p>Georgi Gerganov (<a href="https://github.com/ggerganov">ggerganov</a>) has a reputation for packaging up released models so that they can be run by anyone possessing free time and a little grit. When the weights for <a href="https://openai.com/research/whisper">Whisper</a> (OpenAI’s speech transcription AI) were released, ggerganov developed <a href="https://github.com/ggerganov/whisper.cpp">whisper.cpp</a>, a self-contained program allowing anyone to run the model locally. With the release of LLaMA, <a href="https://github.com/ggerganov/llama.cpp">ggernov/llama.cpp</a> followed shortly thereafter. Now anyone with access to a decent GPU or M1 Macbook can run LLaMA locally.</p>
+<p>Willison, in his post <em><a href="https://simonwillison.net/2023/Mar/11/llama/">LLMs are having a Stable Diffusion Moment</a></em>, aptly comments that running LLaMA locally is more of a proof-of-concept than anything else. He was, however, able to get the 13B parameter model, with performance similar to GPT-3, running on his machine. With much faith in EleutherAI <em>et al.</em> (flagbearers of open AI since OpenAI’s departure), I have no doubt that LLaMA will soon be replicated and improved upon in an unceasing viral cycle, much after the pattern of Stable Diffusion before it.</p>
+<p>A little at first, then all at once, Pandora’s box is now open. What happens when anyone can run a LLM on their laptop? On their <a href="https://twitter.com/rgerganov/status/1635604465603473408">phone</a>? This is what keeps me up at night.</p>
+<p>With this oversized introduction out of the way, let’s address the implications of the original question:</p>
+<p>What happens when the cost of content generation drops to zero?</p>
+<h2 id="a-llama-for-everything">A LLaMA for everything</h2>
+<p>First, I should clarify that by “content,” I mean a lot more than just Text (LLaMA) and Images (Stable Diffusion). It would be silly to believe that there’s <em>not</em> a team of researchers at Google scraping YouTube trying to do the same for video. How long until GitHub releases <em>CodeMonkey</em>, “a one-click solution for turning issues into PRs”? We don’t know, but probably <a href="https://github.com/features/preview/copilot-x">sooner</a> than anyone expects.</p>
+<p>The unique innovation of models like LLaMA and Stable Diffusion is that they run on commodity hardware. Programs have close to zero-marginal cost to be copied: indeed, anything that can run on commodity hardware will eventually be provided as a free service to the average user. When there’s “a LLaMA for everything”, there will be no limit to the types of experiences people are able to generate at little-to-no cost to themselves. Content becomes a post-scarcity good.</p>
+<p>The central hypothesis of this post, containing the points most amenable to discussion, is as follows:</p>
+<ol>
+<li>
+<p>Individuals are able to shape the <em>realities</em> they inhabit through <em>experiences</em> derived from the <em>content</em> they consume. When content is <em>scarce</em>, individuals share similar experiences, and inhabit similar realities. </p>
+</li>
+<li>
+<p>As the cost of content generation drops towards zero, content becomes a <em>post-scarcity</em> good, which may be tailored to each individual’s taste. When content is post-scarce, the <em>breadth</em> of experience increases, as does the <em>diversity</em> of the realities each individual may inhabit.</p>
+</li>
+<li>
+<p>When individuals share little overlap in <em>reality</em>, clear communication breaks down. This <em>fraying of reality</em>, so to speak, will make it much easier for individuals to believe false-yet-self-coherent narratives and feed infohazard-based addictions. This has been a long-time coming; Indeed, it is already happening today.</p>
+</li>
+</ol>
+<p>Let’s break this argument down, one point at a time.</p>
+<h2 id="experience-defines-reality">Experience defines reality</h2>
+<p>Let’s start by breaking down the first point:</p>
+<blockquote>
+<p>1. Individuals are able to shape the <em>realities</em> they inhabit through <em>experiences</em> derived from the <em>content</em> they consume.</p>
+</blockquote>
+<p>It’s first important to establish that the experiences people have define the <em>reality</em> they inhabit. In this context, I’m defining the word “reality” to describe, abstractly, the way an individual “makes sense of the world”, or concretely, “the set of beliefs people hold against their subjective experiences”. People with overlapping beliefs inhabit overlapping realities; it is only within this overlap that ideas can be clearly transmitted, but more on that later.</p>
+<p>We can’t help but process new experiences through the lens of old ones. It is only when we encounter a new experience that <em>does not</em> match our existing reality that we reweigh the set of beliefs we hold. </p>
+<blockquote>
+<p>When content is <em>scarce</em>, individuals share similar experiences, and inhabit similar realities. </p>
+</blockquote>
+<p>Increasingly, for better or (likely) worse, more and more of the experiences we have happen online. Most people can navigate their desktop or homescreen about as well as they can navigate their own home. In terms of the mental energy used to maintain them, digital places are not any less <em>real</em> (using the above definition of <em>reality</em>) than the physical spaces we inhabit.</p>
+<p>Digital experiences generally revolve around the production or consumption of <em>content</em>. Pre-GPT, there was a natural limit to how much digital content any one individual could produce. People, unlike tensors, can not be sliced up and run in parallel. What happens when any experience is an API call away?</p>
+<h2 id="content-post-scarcity">Content post-scarcity</h2>
+<p>A few years ago, Tim Urban published a <a href="https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html">popular post on AGI and the future</a>. In his post, there’s a graph showing <em>super-exponential growth</em>: the curve remains basically flat, until it goes <em>straight vertical</em>. There’s a stick figure standing on the flat part of the curve, just before it goes vertical, seemingly unaware. “Seems like a pretty intense place to be standing”, right?</p>
+<blockquote>
+<p>2. As the cost of content generation drops towards zero, content becomes a <em>post-scarcity</em> good, which may be tailored to each individual’s taste.</p>
+</blockquote>
+<p>Although Urban was using this graph to denote runaway human progress in the context of self-improving AI, by adopting a lens more appropriate for this article, this curve could be said to represent “the amount of content reachable by an individual on the internet over time”. We’re still standing on flat ground for now. Yet a few years from now, someone will look back at us and quip, “2023, eh? Seems like a pretty intense place to be standing.”</p>
+<p>We are standing at the edge of a <em>Cambrian Explosion</em> with respect to the depth and breadth of the type of content people are able to create and consume. Three years ago, had you told me that it took <em><a href="https://andys.page/posts/how-to-draw/">4.2 Gigabytes to Draw Anything</a></em>, I would have laughed and asked you to clarify. Now, when people <a href="https://research.nvidia.com/labs/toronto-ai/VideoLDM/">flirt</a> with the eventual reality of, say, procedurally generated Netflix, I laugh a little more nervously.</p>
+<blockquote>
+<p>When content is post-scarce, the <em>breadth</em> of experience increases, as does the <em>diversity</em> of the realities each individual may inhabit.</p>
+</blockquote>
+<p>When content becomes a post-scarcity good, anything you can imagine can become your reality. This future, if true, is as terrifying as it sounds. </p>
+<h2 id="the-fraying-of-reality">The fraying of reality</h2>
+<p>You’ve finally reached the section with the scary title. It’s not as bad as it sounds.</p>
+<blockquote>
+<p>3. When individuals share little overlap in <em>reality</em>, clear communication breaks down.</p>
+</blockquote>
+<p>People with overlapping beliefs have shared vocabulary of experiences: they inhabit similar realities because the lenses they use to process new experiences are mostly the same. In the absence of shared lenses, however, one’s perceptions of events become distorted relative to another’s. Without a shared vocabulary of experiences, it’s not always easy to communicate what you intend to convey. Quite simply, communication breaks down when people use the same words to mean different things. </p>
+<blockquote>
+<p>This <em>fraying of reality</em>, so to speak, will make it much easier for individuals to believe false-yet-self-coherent narratives and feed infohazard-based addictions.</p>
+</blockquote>
+<p>Because communication breaks down in the presence of misaligned vocabularies, it is only within the overlap of realities that ideas can be transmitted while maintaining their original form. When anyone can generate anything they’d like to experience <em>on demand</em>, there exists a risk of people “becoming lost in their own realities”. We will be left with a so-called <em>Milquetoast Culture</em>: The shared plains of collective consciousness ravaged by a sea of memetic tofu, each thought allocated to the highest bidder.</p>
+<p>Those who do not fall prey to the infohazards left to roam freely will have carved out their own protective bubbles. Within such a bubble, it will be easy for one to reinforce their existing interpretation of reality. When any argument against a given belief can be instantly countered with an essay, an infographic, or an automatically-generated award-winning documentary film, where does that leave us?</p>
+<blockquote>
+<p>This fraying of reality has been a long-time coming. Indeed, it is already happening today.</p>
+</blockquote>
+<p>On YouTube alone, more video is uploaded in an day than a human could possibly consume in their entire lifetime. A lot of this content, however, is subjectively garbage: how do we filter through the noise to find a diamond in the rough?</p>
+<p>By grouping people by their interests, we can amplify any diamonds found. Indeed, people are <em>already</em> grouped by their interests, whether by algorithm or self-sortedly. </p>
+<p>As we read and write to shared communities, we develop a shared vocabulary, and use that vocabulary to make sense of the universe. To an outsider, this shared vocabulary may be nonsensical at best, or easily misinterpretable at worst.</p>
+<p>We have already seen countless breakdowns in communication between communities with different vocabularies for the same terms. Perhaps this is most apparent in the political sphere, which (cynically-speaking) has always been about shaping interpretations of reality through the clever use of words. We need to be more flexible when adopting another’s viewpoint: we need to criticize our own ideas to see where they break down, and avoid getting defensive when others do the same. There will be people who disagree with this post, and this is my hope: the future this post portrays is bleak, and I could not be happier to be wrong. </p>
+<h2 id="picking-up-the-pieces">Picking up the pieces</h2>
+<p>So where does that leave us?</p>
+<p>Frankly, I remain cautiously optimistic. The technology for a true <em>Content Deluge</em> is not quite here yet. In the meantime, I believe the <em>capacity</em> needed to develop the tools it will take to moderate the incoming deluge exists. Moderation has always been a hard problem, but increasing outside pressure is only going to make the existing systems we have to moderate content more resilient. </p>
+<p>Unlike GPT, as people, we all share the reality of <em>human experience</em>. This is a reality that can’t be generated: it is a vocabulary we all share. I hope that the fundamental human need for <em>real</em> social connection—outside of the hollow digital realities we define—will drive people to seek more real-world friendships than the number of digital ones they prompt into existence. When they do, I hope that these friends look to expand the overlap between their respective vocabularies, working towards bridging the gap between their shared realities.</p>
+<p>This argument presented in this post has at least one fatal flaw (among many): it assumes that the path of “getting lost in a private fractured reality” is the path most people will elect to follow. In practice, however, I think the novelty will soon wear off: most people will get sick of said <em>Content Deluge</em> after a while. There are only so many procedurally generated landscapes the eyes can handle before the body wants to step away and experience <em>real</em> nature. The curse of those forced to inhabit a fractured reality will likely be relegated to those who consider themselves members of the <em><a href="https://www.palladiummag.com/2022/11/04/i-do-not-want-to-be-an-internet-person/">Eternally Online</a></em>. I am grateful to not be counted among their ranks.</p>
+<p>With that in mind, as you reach the end of this post, now might be a good time to stretch, take a break, and go outside.</p>
+
+
+<p><em>NB: As this post is a rant, it is not publicly visible.</em></p>
+
+</div>
+<div class="footer">
+  <p><i>Thank you for tuning in!</i></p>
+  <p>Check out more posts by heading <a href="/">Home</a>.</p>
+  <p>Subscribe to this blog via <a href="/atom.xml">Atom/RSS</a>.</p>
+  <p>Copyright © 20xx Insert Employer Here, All Limes Preserved.</p>
+</div>
+</body>
+</html>

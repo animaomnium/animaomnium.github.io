@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+  <title>Keep Stuff Linkable (Crash Lime)</title>
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css" />
+  <link rel="stylesheet" href="/style.css" />
+   
+</head>
+<body style="overflow-x: hidden">
+<div class="header">
+  <p><i>We interrupt this doomscroll <br>to bring you...</i></p>
+  <h1><a class="nolink" href="/">Crash Lime</a></h1>
+  <p>Delicious performance <br>64 bites at a time!</p>
+</div>
+<div class="content">
+<p><i>
+  2023-04-17 •
+  10 minutes required •
+  <a href="https://github.com/animaomnium">Anima Omnium</a>
+</i></p>
+<h1>Keep Stuff Linkable</h1>
+<p><em>2023-04-18 • Revised for clarity and style, with better link queries, based on <a href="https://news.ycombinator.com/item?id=35599363">feedback</a> from HN. Thank you!</em></p>
+<p>You’ve spent hours reading, and a seed of an idea has germinated in your mind. You fire up your <a href="https://neovim.io">favorite text editor</a>, plant it down, and spend a couple hours letting the idea grow out. You’ve finished! You are about to publish your freshly-grown post on the web when you get <em>that sinking feeling</em> in your gut: something’s missing…</p>
+<p>You scan over the post. Is anything wrong? Nope: argument is solid, formatting is A-Ok. But wait… what’s that?</p>
+<p>Where are all the links?</p>
+<p>No <a href="https://www.w3.org/TR/html401/struct/links.html">links</a>, no <a href="https://www.w3.org/Provider/Style/URI">game</a>. (It is the <em>web</em> you are publishing to, after all.) Sighing, you stumble around with <a href="https://duckduckgo.com">Google</a> for a bit before giving up. Maybe some other time. If only there were a better way…</p>
+<h2 id="finding-links-sucks">Finding links sucks</h2>
+<p>It’s probably a lack of <a href="https://www.zotero.org">discipline</a>, but keeping track of the references principally responsible for each little bit of text I write is <em>hard</em>. I have so many linkless posts waiting to be published: I could go ahead and publish them as-is, but by doing so I feel as though I’d be treating you, dear reader, unjustly.</p>
+<p>It’s not that I don’t know what I want to link to. Most of the posts I write are responses to things I’ve read. I know what I want to link to, but I don’t want to lose flow to hunt down a link while writing. I could go back at the end and insert links retrospectively, but it takes more time than I’d like to hop between browser, editor, and what I was thinking about at that point. It would be nice if I could mark links as I write, while still being able to refine each link in-editor as I edit and revise later.</p>
+<p>I wish there was a faster way to link the posts I write. I want to <a href="https://simonwillison.net/2023/Apr/16/web-llm/">write about things that are happening <em>now</em></a>. If I wait a week to hunt down references, things will have already moved on. Writing consistently requires rhythm, and nothing interrupts a consistent rhythm more effectively than haphazardly tumbling down <a href="https://en.m.wikipedia.org/wiki/Wikipedia:Unusual_articles">internet rabbit-holes</a> while in search of the perfect link.</p>
+<p>In a perfect world, I imagine a little robot reading everything alongside me. He records the references and key ideas of each piece. After I write a post, he’d comb through my post sentence by sentence, linking every important phrase to its source. Now, I haven’t quite done this, but this morning I prototyped a quick-and-dirty <a href="https://terrytao.wordpress.com/advice-on-writing-papers/write-a-rapid-prototype-first/">first-order approximation</a>, which should hopefully let me link stuff with greater ease.</p>
+<h2 id="prototyping-linkoln">Prototyping Linkoln</h2>
+<p><em>Linkoln</em>, no pun intended, is the name of my robotic companion. It’s a short hacky <a href="https://www.python.org">Python</a> script I wrote this morning, which I tested against finding links for this post. It’s far from perfect, but it fills the need I had and has validated building a fuller prototype. </p>
+<p>Linkoln parses <a href="https://help.obsidian.md/Linking+notes+and+files/Internal+links">wikilinks</a> out of a <a href="https://commonmark.org/">markdown</a> document, and searches the <a href="https://www.w3.org/MarkUp/html-test/misc/guide.html">world wide web</a> to find a <a href="https://www.w3.org/TR/html401/struct/links.html">hyperlink</a> for each one. To limit the scope of this prototype, Linkoln just uses a full-web search engine. In the future, I plan to run it against my browser history, a database of articles I have saved, blogs I trust, and so on, only resorting to the public web as a last resort.</p>
+<p>Here’s what Linkoln does, on a more concrete level. Given a Markdown post with wikilinks:</p>
+<pre style="background-color:#212121;color:#eeffff;"><code><span># Thoughts on Rust
+</span><span>
+</span><span>[[programming language:Rust]] is a [[systems programming language]] bootstrapped from [[rust prehistory|OCaml]].
+</span></code></pre>
+<p>Linkoln normalizes the post, replacing each wikilink with the best corresponding hyperlink it could find:</p>
+<pre style="background-color:#212121;color:#eeffff;"><code><span># Thoughts on Rust
+</span><span>
+</span><span>[Rust][1] is a [systems programming language][2] bootstrapped from [OCaml][3].
+</span><span>
+</span><span>[1]: https://www.rust-lang.org
+</span><span>[2]: https://en.wikipedia.org/wiki/System_programming_language
+</span><span>[3]: https://github.com/graydon/rust-prehistory
+</span></code></pre>
+<p>Through pragmatic experimentation while writing this post, Linkoln supports three types of wikilinks:</p>
+<ol>
+<li>Literal Links: <code>[[text]]</code> </li>
+<li>Query Links: <code>[[query|text]]</code></li>
+<li>Context Links: <code>[[context:text]]</code></li>
+</ol>
+<p>Here’s a quick breakdown of each link type:</p>
+<p><em>Literal Links</em> search the given query and include the query verbatim. For example:</p>
+<pre style="background-color:#212121;color:#eeffff;"><code><span>[[GitHub]]
+</span></code></pre>
+<p>Searches “GitHub” and becomes:</p>
+<pre style="background-color:#212121;color:#eeffff;"><code><span>[GitHub][0]
+</span><span>
+</span><span>[0]: https://github.com
+</span></code></pre>
+<p><em>Query Links</em> let you use a different query than the text of the link. For example:</p>
+<pre style="background-color:#212121;color:#eeffff;"><code><span>[[notes on a smaller rust|Rust *could* be easier]]
+</span></code></pre>
+<p>Searches “notes on a smaller rust” and becomes:</p>
+<pre style="background-color:#212121;color:#eeffff;"><code><span>[Rust *could* be easier][0]
+</span><span>
+</span><span>[0]: https://boats.gitlab.io/blog/posts/notes-on-a-smaller-rust
+</span></code></pre>
+<p><em>Context Links</em> are useful when qualifying a search for an otherwise generic term. The two halves are concatenated to form the entire query:</p>
+<pre style="background-color:#212121;color:#eeffff;"><code><span>[[wikipedia language:Python]]
+</span></code></pre>
+<p>Searches “wikipedia language Python” and becomes:</p>
+<pre style="background-color:#212121;color:#eeffff;"><code><span>[Python][0]
+</span><span>
+</span><span>[0]: https://en.wikipedia.org/wiki/Python_(programming_language)
+</span></code></pre>
+<p>While the above examples link to basic popular pages, it’s not much harder to embed longer queries inline to find exactly the reference you are looking for.</p>
+<p>I’ve been enjoying fiddling around with Linkoln. Adding a link to a post while in the middle writing only requires wrapping the revelant text with a couple of brackets. Later, as I proof-read and vet the post, I can refine queries to make sure text links to the page I intended. I can keep my link-searching activity in one place (the buffer I’m writing the article in) and let Linkoln take care of the rest.</p>
+<h2 id="low-hanging-fruit">Low-hanging fruit</h2>
+<details>
+<summary>The script itself is… pretty dumb.</summary>
+<p>But, since you asked for it, here it is:</p>
+<pre data-lang="python" style="background-color:#212121;color:#eeffff;" class="language-python "><code class="language-python" data-lang="python"><span style="font-style:italic;color:#4a4a4a;">#!/usr/bin/python3
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Linkoln by Anima Omnium
+</span><span style="font-style:italic;color:#4a4a4a;"># Dedicated to the Public Domain
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Just standard library for portability 
+</span><span style="font-style:italic;color:#c792ea;">import </span><span>sys
+</span><span style="font-style:italic;color:#c792ea;">import </span><span>urllib</span><span style="color:#89ddff;">.</span><span>request
+</span><span style="font-style:italic;color:#c792ea;">import </span><span>time
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Input from file, output to stdout
+</span><span style="font-style:italic;color:#4a4a4a;"># Suggested usage:
+</span><span style="font-style:italic;color:#4a4a4a;"># python linkoln.py INPUT.md &gt; OUTPUT.md
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Read input file name
+</span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#82aaff;">len</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">sys</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">argv</span><span style="color:#89ddff;">) != </span><span style="color:#f78c6c;">2</span><span style="color:#89ddff;">:
+</span><span>  </span><span style="color:#82aaff;">print</span><span style="color:#89ddff;">(&quot;</span><span style="color:#c3e88d;">Usage: linkoln FILE</span><span style="color:#89ddff;">&quot;)
+</span><span>  </span><span style="color:#82aaff;">exit</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">1</span><span style="color:#89ddff;">)
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Read file
+</span><span>FILE </span><span style="color:#89ddff;">= </span><span>sys</span><span style="color:#89ddff;">.</span><span>argv</span><span style="color:#89ddff;">[</span><span style="color:#f78c6c;">1</span><span style="color:#89ddff;">]
+</span><span style="font-style:italic;color:#c792ea;">with </span><span style="color:#82aaff;">open</span><span style="color:#89ddff;">(</span><span>FILE</span><span style="color:#89ddff;">, &quot;</span><span style="color:#c3e88d;">r</span><span style="color:#89ddff;">&quot;) </span><span style="font-style:italic;color:#c792ea;">as </span><span>fin</span><span style="color:#89ddff;">:
+</span><span>  INPUT </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">fin</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">read</span><span style="color:#89ddff;">()
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Link numbering start
+</span><span>OFFSET </span><span style="color:#89ddff;">= </span><span style="color:#f78c6c;">1
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Ignore wikilinks in code, headings, frontmatter
+</span><span>IGNORE </span><span style="color:#89ddff;">= [
+</span><span>  </span><span style="color:#89ddff;">(&quot;</span><span style="color:#c3e88d;">```</span><span style="color:#89ddff;">&quot;, &quot;</span><span style="color:#c3e88d;">```</span><span style="color:#89ddff;">&quot;),
+</span><span>  </span><span style="color:#89ddff;">(&quot;</span><span style="color:#c3e88d;">#</span><span style="color:#89ddff;">&quot;, &quot;\n&quot;),
+</span><span>  </span><span style="color:#89ddff;">(&quot;</span><span style="color:#c3e88d;">`</span><span style="color:#89ddff;">&quot;, &quot;</span><span style="color:#c3e88d;">`</span><span style="color:#89ddff;">&quot;),
+</span><span>  </span><span style="color:#89ddff;">(&quot;</span><span style="color:#c3e88d;">+++</span><span style="color:#89ddff;">&quot;, &quot;</span><span style="color:#c3e88d;">+++</span><span style="color:#89ddff;">&quot;),
+</span><span style="color:#89ddff;">]
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Syntax for links
+</span><span>LINK_OPEN </span><span style="color:#89ddff;">= &quot;</span><span style="color:#c3e88d;">[[</span><span style="color:#89ddff;">&quot;
+</span><span>LINK_CLOSE </span><span style="color:#89ddff;">= &quot;</span><span style="color:#c3e88d;">]]</span><span style="color:#89ddff;">&quot;
+</span><span>LINK_QUERY </span><span style="color:#89ddff;">= &quot;</span><span style="color:#c3e88d;">|</span><span style="color:#89ddff;">&quot;
+</span><span>LINK_CONTEXT </span><span style="color:#89ddff;">= &quot;</span><span style="color:#c3e88d;">:</span><span style="color:#89ddff;">&quot;
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Parser state enum
+</span><span>S_IGNORE </span><span style="color:#89ddff;">= </span><span style="color:#f78c6c;">0
+</span><span>S_SCANIN </span><span style="color:#89ddff;">= </span><span style="color:#f78c6c;">1
+</span><span>S_EATING </span><span style="color:#89ddff;">= </span><span style="color:#f78c6c;">2
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Initialize parser
+</span><span>state </span><span style="color:#89ddff;">= </span><span>S_SCANIN
+</span><span>rem </span><span style="color:#89ddff;">= </span><span>INPUT
+</span><span>closing </span><span style="color:#89ddff;">= &quot;&quot;
+</span><span>inside </span><span style="color:#89ddff;">= &quot;&quot;
+</span><span>colophon </span><span style="color:#89ddff;">= []
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Skip amt chars
+</span><span style="font-style:italic;color:#c792ea;">def </span><span style="color:#82aaff;">skip</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">r</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">amt</span><span style="color:#89ddff;">):
+</span><span>  </span><span style="font-style:italic;color:#c792ea;">return </span><span>r</span><span style="color:#89ddff;">[</span><span>amt</span><span style="color:#89ddff;">:]
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Skip amt, echo what was skipped
+</span><span style="font-style:italic;color:#c792ea;">def </span><span style="color:#82aaff;">eat</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">r</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">amt</span><span style="color:#89ddff;">):
+</span><span>  </span><span style="color:#82aaff;">print</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">r</span><span style="color:#89ddff;">[:</span><span style="color:#82aaff;">amt</span><span style="color:#89ddff;">], </span><span style="color:#f78c6c;">end</span><span style="color:#89ddff;">=&quot;&quot;)
+</span><span>  </span><span style="font-style:italic;color:#c792ea;">return </span><span style="color:#82aaff;">skip</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">r</span><span style="color:#89ddff;">, </span><span style="color:#82aaff;">amt</span><span style="color:#89ddff;">)
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Check r prefix matches against
+</span><span style="font-style:italic;color:#c792ea;">def </span><span style="color:#82aaff;">check</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">r</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">against</span><span style="color:#89ddff;">):
+</span><span>  </span><span style="font-style:italic;color:#c792ea;">return </span><span>r</span><span style="color:#89ddff;">[:</span><span style="color:#82aaff;">len</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">against</span><span style="color:#89ddff;">)] == </span><span>against
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Parse inside wikilink
+</span><span style="font-style:italic;color:#c792ea;">def </span><span style="color:#82aaff;">extract</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">inside</span><span style="color:#89ddff;">):
+</span><span>  </span><span style="color:#89ddff;">(</span><span>link</span><span style="color:#89ddff;">, </span><span>text</span><span style="color:#89ddff;">) = (</span><span>inside</span><span style="color:#89ddff;">, </span><span>inside</span><span style="color:#89ddff;">)
+</span><span>  </span><span style="font-style:italic;color:#c792ea;">if </span><span>LINK_QUERY </span><span style="color:#89ddff;">in </span><span>inside</span><span style="color:#89ddff;">:
+</span><span>    </span><span style="color:#89ddff;">(</span><span>link</span><span style="color:#89ddff;">, </span><span>text</span><span style="color:#89ddff;">) = </span><span style="color:#82aaff;">inside</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">split</span><span style="color:#89ddff;">(</span><span>LINK_QUERY</span><span style="color:#89ddff;">)
+</span><span>  </span><span style="font-style:italic;color:#c792ea;">elif </span><span>LINK_CONTEXT </span><span style="color:#89ddff;">in </span><span>inside</span><span style="color:#89ddff;">:
+</span><span>    </span><span style="color:#89ddff;">(</span><span>link</span><span style="color:#89ddff;">, </span><span>text</span><span style="color:#89ddff;">) = </span><span style="color:#82aaff;">inside</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">split</span><span style="color:#89ddff;">(</span><span>LINK_CONTEXT</span><span style="color:#89ddff;">)
+</span><span>    link </span><span style="color:#89ddff;">= </span><span style="font-style:italic;color:#c792ea;">f</span><span style="color:#89ddff;">&quot;{</span><span>link</span><span style="color:#89ddff;">} {</span><span>text</span><span style="color:#89ddff;">}&quot;
+</span><span>  </span><span style="font-style:italic;color:#c792ea;">return </span><span style="color:#89ddff;">(</span><span>link</span><span style="color:#89ddff;">, </span><span>text</span><span style="color:#89ddff;">)
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Echo formatted link
+</span><span style="font-style:italic;color:#c792ea;">def </span><span style="color:#82aaff;">emit_link</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">entry</span><span style="color:#89ddff;">):
+</span><span>  </span><span style="color:#89ddff;">(</span><span>num</span><span style="color:#89ddff;">, </span><span>inside</span><span style="color:#89ddff;">) = </span><span>entry
+</span><span>  </span><span style="color:#89ddff;">(</span><span style="font-style:italic;color:#ff5370;">_</span><span style="color:#89ddff;">, </span><span>inside</span><span style="color:#89ddff;">) = </span><span style="color:#82aaff;">extract</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">inside</span><span style="color:#89ddff;">)
+</span><span>  </span><span style="color:#82aaff;">print</span><span style="color:#89ddff;">(</span><span style="font-style:italic;color:#c792ea;">f</span><span style="color:#89ddff;">&quot;</span><span style="color:#c3e88d;">[</span><span style="color:#89ddff;">{</span><span style="color:#82aaff;">inside</span><span style="color:#89ddff;">}</span><span style="color:#c3e88d;">][</span><span style="color:#89ddff;">{</span><span style="color:#82aaff;">num</span><span style="color:#89ddff;">}</span><span style="color:#c3e88d;">]</span><span style="color:#89ddff;">&quot;, </span><span style="color:#f78c6c;">end</span><span style="color:#89ddff;">=&quot;&quot;)
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Echo formatted link reference
+</span><span style="font-style:italic;color:#c792ea;">def </span><span style="color:#82aaff;">emit_entry</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">entry</span><span style="color:#89ddff;">):
+</span><span>  </span><span style="color:#89ddff;">(</span><span>num</span><span style="color:#89ddff;">, </span><span>inside</span><span style="color:#89ddff;">) = </span><span>entry
+</span><span>  </span><span style="color:#89ddff;">(</span><span>inside</span><span style="color:#89ddff;">, </span><span style="font-style:italic;color:#ff5370;">_</span><span style="color:#89ddff;">) = </span><span style="color:#82aaff;">extract</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">inside</span><span style="color:#89ddff;">)
+</span><span>  inside </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">google_it</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">inside</span><span style="color:#89ddff;">)
+</span><span>  </span><span style="color:#82aaff;">print</span><span style="color:#89ddff;">(</span><span style="font-style:italic;color:#c792ea;">f</span><span style="color:#89ddff;">&quot;</span><span style="color:#c3e88d;">[</span><span style="color:#89ddff;">{</span><span style="color:#82aaff;">num</span><span style="color:#89ddff;">}</span><span style="color:#c3e88d;">]: </span><span style="color:#89ddff;">{</span><span style="color:#82aaff;">inside</span><span style="color:#89ddff;">}&quot;)
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Locate link matching given query
+</span><span style="font-style:italic;color:#c792ea;">def </span><span style="color:#82aaff;">google_it</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">query</span><span style="color:#89ddff;">):
+</span><span>  </span><span style="font-style:italic;color:#4a4a4a;"># Dumbest most fragile hack ever
+</span><span>  quoted </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">urllib</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">parse</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">quote</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">query</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">safe</span><span style="color:#89ddff;">=&#39;&#39;)
+</span><span>  </span><span style="font-style:italic;color:#4a4a4a;"># Don&#39;t hammer friends at DuckDuckGo
+</span><span>  </span><span style="color:#82aaff;">time</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">sleep</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">0</span><span style="color:#89ddff;">.</span><span style="color:#f78c6c;">5</span><span style="color:#89ddff;">)
+</span><span>  </span><span style="font-style:italic;color:#c792ea;">try</span><span style="color:#89ddff;">:
+</span><span>    contents </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">urllib</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">request</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">urlopen</span><span style="color:#89ddff;">(</span><span style="font-style:italic;color:#c792ea;">f</span><span style="color:#89ddff;">&quot;</span><span style="color:#c3e88d;">https://lite.duckduckgo.com/lite/search&amp;q=</span><span style="color:#89ddff;">{</span><span style="color:#82aaff;">quoted</span><span style="color:#89ddff;">}&quot;).</span><span style="color:#82aaff;">read</span><span style="color:#89ddff;">()
+</span><span>    </span><span style="font-style:italic;color:#4a4a4a;"># Parsing html is easy
+</span><span>    top_result </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">contents</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">split</span><span style="color:#89ddff;">(</span><span style="font-style:italic;color:#c792ea;">b</span><span style="color:#89ddff;">&quot;</span><span style="color:#c3e88d;">link-text</span><span style="color:#89ddff;">&quot;)[</span><span style="color:#f78c6c;">1</span><span style="color:#89ddff;">]
+</span><span>    top_link </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">top_result</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">split</span><span style="color:#89ddff;">(</span><span style="font-style:italic;color:#c792ea;">b</span><span style="color:#89ddff;">&quot;</span><span style="color:#c3e88d;">&gt;</span><span style="color:#89ddff;">&quot;)[</span><span style="color:#f78c6c;">1</span><span style="color:#89ddff;">].</span><span style="color:#82aaff;">split</span><span style="color:#89ddff;">(</span><span style="font-style:italic;color:#c792ea;">b</span><span style="color:#89ddff;">&quot;</span><span style="color:#c3e88d;">&lt;</span><span style="color:#89ddff;">&quot;)[</span><span style="color:#f78c6c;">0</span><span style="color:#89ddff;">]
+</span><span>  </span><span style="font-style:italic;color:#c792ea;">except</span><span style="color:#89ddff;">:
+</span><span>    </span><span style="font-style:italic;color:#4a4a4a;"># Leave for human to fix 
+</span><span>    </span><span style="font-style:italic;color:#c792ea;">return f</span><span style="color:#89ddff;">&quot;</span><span style="color:#c3e88d;">ERROR: </span><span style="color:#89ddff;">{</span><span>query</span><span style="color:#89ddff;">}&quot;
+</span><span>  </span><span style="font-style:italic;color:#c792ea;">return </span><span style="color:#89ddff;">&quot;</span><span style="color:#c3e88d;">https://</span><span style="color:#89ddff;">&quot; + </span><span style="color:#82aaff;">top_link</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">decode</span><span style="color:#89ddff;">(&quot;</span><span style="color:#c3e88d;">utf-8</span><span style="color:#89ddff;">&quot;)
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># State machine driving loop
+</span><span style="font-style:italic;color:#c792ea;">while </span><span>rem </span><span style="color:#89ddff;">!= &quot;&quot;:
+</span><span>  </span><span style="font-style:italic;color:#4a4a4a;"># Scanning for next link or comment 
+</span><span>  </span><span style="font-style:italic;color:#c792ea;">if </span><span>state </span><span style="color:#89ddff;">== </span><span>S_SCANIN</span><span style="color:#89ddff;">:
+</span><span>    </span><span style="font-style:italic;color:#c792ea;">for </span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">open</span><span style="color:#89ddff;">, </span><span>close</span><span style="color:#89ddff;">) </span><span style="font-style:italic;color:#c792ea;">in </span><span>IGNORE</span><span style="color:#89ddff;">:
+</span><span>      </span><span style="font-style:italic;color:#c792ea;">try</span><span style="color:#89ddff;">:
+</span><span>        </span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#82aaff;">check</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">rem</span><span style="color:#89ddff;">, </span><span style="color:#82aaff;">open</span><span style="color:#89ddff;">):
+</span><span>          rem </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">eat</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">rem</span><span style="color:#89ddff;">, </span><span style="color:#82aaff;">len</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">open</span><span style="color:#89ddff;">))
+</span><span>          closing </span><span style="color:#89ddff;">= </span><span>close
+</span><span>          state </span><span style="color:#89ddff;">= </span><span>S_IGNORE
+</span><span>          </span><span style="font-style:italic;color:#c792ea;">break
+</span><span>      </span><span style="font-style:italic;color:#c792ea;">except</span><span style="color:#89ddff;">:
+</span><span>        </span><span style="font-style:italic;color:#c792ea;">pass
+</span><span>    </span><span style="font-style:italic;color:#c792ea;">if </span><span>state </span><span style="color:#89ddff;">== </span><span>S_IGNORE</span><span style="color:#89ddff;">:
+</span><span>      </span><span style="font-style:italic;color:#c792ea;">continue
+</span><span>    </span><span style="font-style:italic;color:#c792ea;">try</span><span style="color:#89ddff;">:
+</span><span>      </span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#82aaff;">check</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">rem</span><span style="color:#89ddff;">, </span><span>LINK_OPEN</span><span style="color:#89ddff;">):
+</span><span>        rem </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">skip</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">rem</span><span style="color:#89ddff;">, </span><span style="color:#82aaff;">len</span><span style="color:#89ddff;">(</span><span>LINK_OPEN</span><span style="color:#89ddff;">))
+</span><span>        inside </span><span style="color:#89ddff;">= &quot;&quot;
+</span><span>        state </span><span style="color:#89ddff;">= </span><span>S_EATING
+</span><span>        </span><span style="font-style:italic;color:#c792ea;">continue
+</span><span>    </span><span style="font-style:italic;color:#c792ea;">except</span><span style="color:#89ddff;">:
+</span><span>      </span><span style="font-style:italic;color:#c792ea;">pass
+</span><span>    rem </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">eat</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">rem</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">1</span><span style="color:#89ddff;">)
+</span><span>
+</span><span>  </span><span style="font-style:italic;color:#4a4a4a;"># Eating contents of wikilink
+</span><span>  </span><span style="font-style:italic;color:#c792ea;">elif </span><span>state </span><span style="color:#89ddff;">== </span><span>S_EATING</span><span style="color:#89ddff;">:
+</span><span>    </span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#82aaff;">check</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">rem</span><span style="color:#89ddff;">, </span><span>LINK_CLOSE</span><span style="color:#89ddff;">):
+</span><span>      rem </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">skip</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">rem</span><span style="color:#89ddff;">, </span><span style="color:#82aaff;">len</span><span style="color:#89ddff;">(</span><span>LINK_CLOSE</span><span style="color:#89ddff;">))
+</span><span>      entry </span><span style="color:#89ddff;">= (</span><span style="color:#82aaff;">len</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">colophon</span><span style="color:#89ddff;">) + </span><span>OFFSET</span><span style="color:#89ddff;">, </span><span>inside</span><span style="color:#89ddff;">)
+</span><span>      </span><span style="color:#82aaff;">emit_link</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">entry</span><span style="color:#89ddff;">)
+</span><span>      </span><span style="color:#82aaff;">colophon</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">append</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">entry</span><span style="color:#89ddff;">)
+</span><span>      state </span><span style="color:#89ddff;">= </span><span>S_SCANIN
+</span><span>    </span><span style="font-style:italic;color:#c792ea;">else</span><span style="color:#89ddff;">:
+</span><span>      inside </span><span style="color:#89ddff;">= </span><span>inside </span><span style="color:#89ddff;">+ </span><span>rem</span><span style="color:#89ddff;">[:</span><span style="color:#f78c6c;">1</span><span style="color:#89ddff;">]
+</span><span>      rem </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">skip</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">rem</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">1</span><span style="color:#89ddff;">)
+</span><span>
+</span><span>  </span><span style="font-style:italic;color:#4a4a4a;"># Ignoring contents of comments
+</span><span>  </span><span style="font-style:italic;color:#c792ea;">elif </span><span>state </span><span style="color:#89ddff;">== </span><span>S_IGNORE</span><span style="color:#89ddff;">:
+</span><span>    </span><span style="font-style:italic;color:#c792ea;">if </span><span style="color:#82aaff;">check</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">rem</span><span style="color:#89ddff;">, </span><span style="color:#82aaff;">closing</span><span style="color:#89ddff;">):
+</span><span>      rem </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">eat</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">rem</span><span style="color:#89ddff;">, </span><span style="color:#82aaff;">len</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">closing</span><span style="color:#89ddff;">))
+</span><span>      state </span><span style="color:#89ddff;">= </span><span>S_SCANIN
+</span><span>    </span><span style="font-style:italic;color:#c792ea;">else</span><span style="color:#89ddff;">:
+</span><span>      rem </span><span style="color:#89ddff;">= </span><span style="color:#82aaff;">eat</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">rem</span><span style="color:#89ddff;">, </span><span style="color:#f78c6c;">1</span><span style="color:#89ddff;">)
+</span><span>
+</span><span>  </span><span style="font-style:italic;color:#4a4a4a;"># Frick your computer is on fire
+</span><span>  </span><span style="font-style:italic;color:#c792ea;">else</span><span style="color:#89ddff;">:
+</span><span>    </span><span style="font-style:italic;color:#c792ea;">assert </span><span>false, </span><span style="color:#89ddff;">&quot;</span><span style="color:#c3e88d;">Invalid state</span><span style="color:#89ddff;">&quot;
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;"># Google all the queries
+</span><span style="color:#82aaff;">print</span><span style="color:#89ddff;">()
+</span><span style="font-style:italic;color:#c792ea;">for </span><span>entry </span><span style="font-style:italic;color:#c792ea;">in </span><span>colophon</span><span style="color:#89ddff;">:
+</span><span>  </span><span style="color:#82aaff;">emit_entry</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">entry</span><span style="color:#89ddff;">)
+</span></code></pre>
+</details>
+<p>Linkoln, as rendered above, is far from perfect. In its original form, Linkoln did not search the web for links, but rather placed the query below the main text, quickly converting wikilinked markdown to a normalized reference format for later manual linking:</p>
+<pre style="background-color:#212121;color:#eeffff;"><code><span>This is *not* [[CommonMark-flavored:Markdown]]
+</span></code></pre>
+<p>became:</p>
+<pre style="background-color:#212121;color:#eeffff;"><code><span>This is *not* [Markdown][0]
+</span><span>
+</span><span>[0]: CommonMark-flavored Markdown
+</span></code></pre>
+<p>After this, I got curious and experimented with various kinds of queries, with different query types (e.g. web, reading list, history, etc.) disambiguated using standard DDG <code>bang!notation</code>, but decided to limit this post to web search to avoid steering the conversation into the technical weeds.</p>
+<h2 id="are-links-dead">Are links dead?</h2>
+<p>At this point, it should be obvious that Linkoln is, by no means, a silver bullet. It’s not intended to be one. The point of this post is decidedly <em>not</em> to highlight some gimmicky throwaway python script. Instead, I hope to start a discussion on the importance of building and using tools to improve the process of writing for the web.</p>
+<p>Despite Linkoln’s meta-ironic reliance on them, the need for web-wide search engines could be said to be a failure in the organizational structure of the web. As the proliferation of <a href="https://openai.com/research/gpt-4">GPT-4</a>-like tools (some of which can be <a href="https://mlc.ai/web-llm/">run in your browser</a>) lead to the crystallization of the <a href="https://www.theatlantic.com/technology/archive/2021/08/dead-internet-theory-wrong-but-feels-true/619937/">Dead Internet</a>, how will we find a single live page in a soup of procedurally generated web-gloop?</p>
+<p>Perhaps links <em>are</em> dead. Why link when ChatGPT can explain? Why post and upvote when <a href="https://gantry.io/blog/papers-to-know-20230110">attention-maximizing algorithms</a> can recommend? Perhaps we’re at the end of the old-web, now a corner relegated to hobbyists, as all text ever written is absorbed in a single differentiable scream.</p>
+<p>For us hobbyists, however, perhaps links <em>aren’t</em> dead: they’re vitally important. Links lend authority. Trace a hop away from your homepage, maybe two: can you still trust what you read?</p>
+<p>So in this deluge, link <em>more</em>, not less. Don’t link to stuff you don’t trust. Black-boxes that spit out links, like Linkoln, will only become more common in the future. With that in mind, when using a tool like Linkoln—script, chatbot, or otherwise—make sure you <em>thoroughly</em> vet what you’re linking to. Remember that you are not <em>just</em> linking, but building a <em>Web of Trust</em>. Links need to be a <em>signal</em> that cuts through the noise, not vice-versa.</p>
+<p>Links aren’t dead. And, despite the best efforts of the <a href="https://animaomnium.github.io/incoming-content-deluge">incoming <em>Content Deluge</em></a>, neither is the old web. Keep the dream of an open web alive: </p>
+<p>Keep on linking! </p>
+
+
+<p><i>
+  <a href="https://lobste.rs/stories/new?url=https%3A&#x2F;&#x2F;animaomnium.github.io&#x2F;keep-stuff-linkable&#x2F;">Lobsters</a> •
+  <a href="https://news.ycombinator.com/submitlink?u=https%3A&#x2F;&#x2F;animaomnium.github.io&#x2F;keep-stuff-linkable&#x2F;&t=Keep%20Stuff%20Linkable">HN</a> •
+  <a href="https://www.reddit.com/submit?url=https%3A&#x2F;&#x2F;animaomnium.github.io&#x2F;keep-stuff-linkable&#x2F;">Reddit</a> •
+  <a href="http://twitter.com/share?url=https%3A&#x2F;&#x2F;animaomnium.github.io&#x2F;keep-stuff-linkable&#x2F;&text=Keep%20Stuff%20Linkable">Twitter</a>
+</i></p>
+
+</div>
+<div class="footer">
+  <p><i>Thank you for tuning in!</i></p>
+  <p>Check out more posts by heading <a href="/">Home</a>.</p>
+  <p>Subscribe to this blog via <a href="/atom.xml">Atom/RSS</a>.</p>
+  <p>Copyright © 20xx Insert Employer Here, All Limes Preserved.</p>
+</div>
+</body>
+</html>

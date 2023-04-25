@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+  <title>What Austral Proves (Crash Lime)</title>
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css" />
+  <link rel="stylesheet" href="/style.css" />
+   
+</head>
+<body style="overflow-x: hidden">
+<div class="header">
+  <p><i>We interrupt this doomscroll <br>to bring you...</i></p>
+  <h1><a class="nolink" href="/">Crash Lime</a></h1>
+  <p>Delicious performance <br>64 bites at a time!</p>
+</div>
+<div class="content">
+<p><i>
+  2023-02-15 •
+  9 minutes required •
+  <a href="https://github.com/animaomnium">Anima Omnium</a>
+</i></p>
+<h1>What Austral Proves</h1>
+<p><a href="https://austral-lang.org">Austral</a> is a novel systems programming language designed by <a href="https://borretti.me">Fernando Borretti</a>:</p>
+<blockquote>
+<p>You can think of it as <em>Rust: The Good Parts</em> or a modernized, stripped-down Ada. It features a strong static type system, linear types, capability-based security, and strong modularity.</p>
+</blockquote>
+<p>I’ve been thinking a lot about <a href="https://github.com/austral/austral">Austral</a> recently. It bundles a lot of the right features together in one place.</p>
+<p>Austral is designed for safety-critical systems software. Austral has the philosophy that, if a programmer looks at some code, they should be able to say exactly what it does, down to the functions it calls and the assembly it emits. This goal has informed a number of design decisions: the language is unambiguous, uses linear types to model resources, and library permissions are constrained using capabilities. It wouldn’t be a stretch to say that Austral is a language Dijkstra would love: it guides you towards writing <a href="https://www.cs.utexas.edu/~EWD/transcriptions/EWD01xx/EWD117.html">perfect programs</a>.</p>
+<p>Austral is a simple language. Like <a href="https://go.dev/">Go</a>, it is designed to be small enough to fit in the mind of a single programmer. The language has a compact 100-page <a href="https://austral-lang.org/spec/spec.html">specification</a>; it’s <a href="https://borretti.me/article/simplicity-and-survival">not a big language</a>:</p>
+<blockquote>
+<p>A central constraint in the design of Austral is the language should be easy to implement. Not just because I was the only person writing the compiler, but because I want Austral to be a hundred year language, where you can reliably run code from decades ago (Common Lisp is like this: it is possible). If, for whatever reason, the source code of the bootstrapping compiler was lost, it would be trivial to rewrite it again from the ~100 pages of spec (roughly half of which describes the rationale for various design decisions).</p>
+</blockquote>
+<p>To help you cobble together a rough picture of Austral, I’ll say it has a <a href="https://en.wikipedia.org/wiki/Ada_(programming_language)">Ada</a>-like syntax with <a href="https://en.wikipedia.org/wiki/rust">Rust</a>-like semantics. Like <a href="https://doc.rust-lang.org/book/ch10-02-traits.html">Rust</a>, it has <a href="https://austral-lang.org/tutorial/modules">traits</a> (typeclasses) for modeling interfaces. Austral also leverages the type system to model <a href="https://en.wikipedia.org/wiki/Resource_management_(computing)">resources</a>, which it does through the use of <a href="https://wiki.c2.com/LinearTypes">Linear Types</a>. (Rust uses <a href="https://en.wikipedia.org/wiki/Substructural_type_system#Affine_type_systems">Affine Types</a>, which are similar, but a little less restrictive.)</p>
+<p>Austral divides values into two type <a href="https://en.wikipedia.org/wiki/Universe_(mathematics)">Universes</a>: <em>free</em> values, which are small and can be copied freely, and <em>linear</em> values, which must be used <em>exactly</em> once. This constraint ensures that there is one—and only one—handle to a linear value at any given point in the program.</p>
+<p>Austral’s power to model resources stems from its Linear type system. Most data—like bools, ints, and small structs—can be modeled using normal free values. Resources—like <a href="https://en.wikipedia.org/wiki/Memory_management">memory</a>, <a href="https://en.wikipedia.org/wiki/File_descriptor">file descriptors</a>, and database connections—are modeled as <em>linear values</em>. Linear values use the type system to statically ensure that there is only one handle to a resource at any given point in the program. Modeling resources is essential in <a href="https://en.wikipedia.org/wiki/Systems_programming">systems programming</a>, and Austral, like Rust, will catch <a href="https://www.nsa.gov/Press-Room/News-Highlights/Article/Article/3215760/nsa-releases-guidance-on-how-to-protect-against-software-memory-safety-issues/">memory-safety</a> bugs (and other similar classes of errors) at compile-time.</p>
+<p>Austral includes a few innovations over Rust, such as a novel <a href="https://borretti.me/article/how-australs-linear-type-checker-works#borrow-long"><em>borrow</em></a> syntax for annotating regional lifetimes:</p>
+<pre style="background-color:#212121;color:#eeffff;"><code><span>let x: Lin := make();
+</span><span>borrow x as ref in R do
+</span><span>   -- Here, we can refer to the region by
+</span><span>   -- its name, `R`.
+</span><span>   let ref2: &amp;[T, R] := transform(ref);
+</span><span>end;
+</span><span>consume(x);
+</span></code></pre>
+<p>By design of being a simpler language, however, Austral is a bit more restrictive than Rust in a few areas. The largest restrictions that come to mind are:</p>
+<ol>
+<li>
+<p>Linear Types require explicit <a href="https://en.wikipedia.org/wiki/Destructor_(computer_programming)">destructors</a> to clean up resources, because all values must be used <em>exactly</em> once. This can get a little verbose. Rust uses Affine Types (values must be used <em>at most</em> once), meaning that resources are cleaned up automatically according to Rust’s <a href="https://doc.rust-lang.org/nomicon/drop-flags.html">Drop</a> semantics.</p>
+</li>
+<li>
+<p>Austral uses <a href="https://stackoverflow.com/questions/50251487/what-are-non-lexical-lifetimes">lexical regions</a> to model <a href="https://en.wikipedia.org/wiki/Object_lifetime">lifetimes</a>, meaning that the lifetimes of values are processed at the lexical, i.e. block, level. Rust uses fine-grained non-lexical lifetimes, meaning there are some valid programs that Rust permits but Austral disallows.</p>
+</li>
+<li>
+<p>Austral, like Rust, uses a <a href="https://doc.rust-lang.org/1.8.0/book/references-and-borrowing.html">borrow checker</a>. As borrow checkers tie resources to the stack, and stacks map to the <a href="https://en.m.wikibooks.org/wiki/Haskell/Zippers#Differentiation_of_data_types">one-hole context</a> of cycle-free <a href="https://en.wikipedia.org/wiki/Inductive_type">inductive datatypes</a>, it is impossible to express data structures that <em>contain cycles</em> in Rust or Austral. (Without an escape-hatch like <em>unsafe</em> or <a href="https://en.wikipedia.org/wiki/Fundamental_theorem_of_software_engineering">another level of indirection</a>.)</p>
+</li>
+</ol>
+<p>It’s important to note that these restrictions are purposeful: Requiring explicit resource cleanup ensures that the <a href="https://doc.rust-lang.org/reference/destructors.html">drop-order</a> is well-defined, and that there is no invisible performance impact due to automatically-inserted drop calls; lexical regions keep the compiler implementation, and thus the language itself, small and easy to reason about; and if you’re reaching for cyclic data at the application-level, you’re probably looking to model <a href="https://www.cell-lang.net/relations.html">relations</a>, in which case just use (a linear handle to) a relational database.</p>
+<p>Borretti has said that these restrictions exist to keep the language <em>simple</em>. By any metric, I’d say he’s succeeded. Heck, the linear type inference engine at the core of the language is only <a href="https://borretti.me/article/how-australs-linear-type-checker-works">600 lines long</a>. No, seriously, <a href="https://github.com/austral/austral/blob/master/lib/LinearityCheck.ml">take a look</a>.</p>
+<p>Rust, on the other hand, is a huge, <a href="https://vorner.github.io/difficult.html">complex</a> language. In my mind, I pinned a lot of this complexity on Rust’s borrow checker and type system. Having worked with Rust for a while, I’d argue that a good amount of this complexity is <a href="https://en.wikipedia.org/wiki/No_Silver_Bullet">accidental</a>: when Rust took its first steps, no mainstream language sported a borrow-checker. The <a href="https://www.sebastiansylvan.com/post/why-most-high-level-languages-are-slow/">dichotomy</a> for any new language at the time was <em>slow-but-memory-safe</em> or <em>fast-but-footgunned</em>. Rust proved this dichotomy false, but getting to that point wasn’t an <a href="https://github.com/graydon/rust-prehistory">easy road</a>. (<a href="https://github.com/rust-lang/polonius">Polonius</a>, anyone?)</p>
+<p>While more restrictive than Rust, Austral, with its 600-line linear-type borrow-checker, proves that implementing compiler-enforced resource safety isn’t as hard as it once was; with the benefit of hindsight, we can avoid some of the accidental complexity originally thought necessary. </p>
+<p>If you can express linear types in less code than a garbage collector, why not just use linear types to manage memory? A lot of impractical theoretical groundwork laid in decades past is finally becoming tractable and workable. We’re in a <a href="https://devpoga.org/post/2019-11-03-golden-age-of-programming-language/">golden era</a> of programming language research. <a href="https://llvm.org">LLVM</a>, the <a href="https://langserver.org/">Language Server Protocol</a>, better <a href="https://craftinginterpreters.com/">resources</a>, and bigger <a href="https://proglangdesign.net">communities</a> have turned designing a new compiler from a PhD thesis to a weekend project. There’s no excuse to ignore recent innovations. Linear types in 600 lines of code is quite the accomplishment, but it’s indicative of a larger trend.</p>
+<p>I think we’re finally starting to get a handle on software engineering as a discipline. Gone are the wild-west days of PHP and CGI, shotgun debugging and panic deploys. Linear types, capabilities, algebraic effects, and program verification are old tools—finally becoming tractable—that let us understand, limit, and shape a program’s behavior, as Software <em>Engineers</em>. </p>
+<p>Dijkstra grew disillusioned with Computing Science as a discipline: the tools simply weren’t there yet. Austral proves that this is no longer the case. The tools are on the table, what to build from here?</p>
+<p>It’s too early to say what will happen with Austral in the long-run, but in the least it has been designed for longevity. Like Rust before it, Austral started with a <a href="https://en.wikipedia.org/wiki/Bootstrapping_(compilers)">bootstrapping compiler</a> written in <a href="https://ocaml.org/">OCaml</a>; it seems that the goal is now to write out a <a href="https://en.wikipedia.org/wiki/Self-hosting_(compilers)">self-hosting</a> compiler in Austral itself. I hope the language finds its <a href="https://ano.ee/blog/the-niche-programmer">niche</a> (safety-critical embedded?) and quickly grows to do much more.</p>
+<p>There will be some growing pains. At some point, as Rust discovered, the <a href="https://rust-lang.github.io/rfcs/2094-nll.html">restrictions</a> imposed by lexical regions will have to be re-evaluated. The package ecosystem is nascent, so while I wouldn’t quite build your next company in the language, it might be fun (and useful!) to port over a little low-level library. (Forget <a href="https://enet4.github.io/rust-tropes/#rewrite-in-rust">Rust</a>, Rewrite it in Austral!)</p>
+<p>To recap: <a href="https://austral-lang.org">Austral</a> is a <a href="https://en.wikipedia.org/wiki/Systems_programming">systems programming language</a> that uses <a href="https://wiki.c2.com/LinearTypes">linear types</a> to model <a href="https://en.wikipedia.org/wiki/Resource_management_(computing)">resources</a>. It’s <a href="https://austral-lang.org/spec/spec.html">small</a>, and is working proof that borrow checkers need <a href="https://borretti.me/article/how-australs-linear-type-checker-works">not</a> be complex. I hope that Austral continues to grow and build on its innovations; I hope that future languages continue the example Austral sets and build off of prior research in a way that makes it practically tractable. What’s Austral for <a href="https://github.com/Kindelia/Kind">dependent types</a>? <a href="https://futhark-lang.org/">Automatic parallelization</a>? <a href="https://www.unison-lang.org/">Distributed computing</a>? Time will tell.</p>
+
+
+<p><i>
+  <a href="https://lobste.rs/stories/new?url=https%3A&#x2F;&#x2F;animaomnium.github.io&#x2F;what-austral-proves&#x2F;">Lobsters</a> •
+  <a href="https://news.ycombinator.com/submitlink?u=https%3A&#x2F;&#x2F;animaomnium.github.io&#x2F;what-austral-proves&#x2F;&t=What%20Austral%20Proves">HN</a> •
+  <a href="https://www.reddit.com/submit?url=https%3A&#x2F;&#x2F;animaomnium.github.io&#x2F;what-austral-proves&#x2F;">Reddit</a> •
+  <a href="http://twitter.com/share?url=https%3A&#x2F;&#x2F;animaomnium.github.io&#x2F;what-austral-proves&#x2F;&text=What%20Austral%20Proves">Twitter</a>
+</i></p>
+
+</div>
+<div class="footer">
+  <p><i>Thank you for tuning in!</i></p>
+  <p>Check out more posts by heading <a href="/">Home</a>.</p>
+  <p>Subscribe to this blog via <a href="/atom.xml">Atom/RSS</a>.</p>
+  <p>Copyright © 20xx Insert Employer Here, All Limes Preserved.</p>
+</div>
+</body>
+</html>
